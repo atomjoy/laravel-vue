@@ -333,7 +333,7 @@ svg {
 }
 
 img.logo {
-	content: var(--logo);
+	content: var(--logo) !important;
 }
 
 /* panel scrollbar */
