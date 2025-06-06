@@ -1,0 +1,31 @@
+@import url('@/assets/css/root.css');
+
+nav {
+	float: left;
+	width: 100%;
+}
+
+.menu_link {
+	float: left;
+	padding: 5px 10px;
+	margin: 5px;
+	color: #fff;
+	background: var(--accent);
+	font-size: 14px;
+	border-radius: 10px;
+}
+
+.section_padding {
+	float: left;
+	width: 100%;
+	padding-inline: 25px;
+	min-height: 100vh;
+	position: relative;
+}
+
+.section_wrapper {
+	margin: 0px auto;
+	height: auto;
+	width: 90%;
+	max-width: 1120px;
+}
