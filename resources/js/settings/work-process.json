@@ -1,0 +1,22 @@
+{
+	"list": [
+		{
+			"step": "Step 1",
+			"title": "Research and Discovery",
+			"text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea laudantium dignissimos voluptas accusantium quod non, temporibus, debitis libero consequuntur doloremque!",
+			"icon": "fa-regular fa-lightbulb"
+		},
+		{
+			"step": "Step 2",
+			"title": "Design and Prototyping",
+			"text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea laudantium dignissimos voluptas accusantium quod non, temporibus, debitis libero consequuntur doloremque!",
+			"icon": "fa-solid fa-pen-ruler"
+		},
+		{
+			"step": "Step 3",
+			"title": "Development and Testing",
+			"text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea laudantium dignissimos voluptas accusantium quod non, temporibus, debitis libero consequuntur doloremque!",
+			"icon": "fa-solid fa-clipboard-list"
+		}
+	]
+}

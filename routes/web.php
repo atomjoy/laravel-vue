@@ -2,17 +2,34 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Laravel api routes
+// Admin guard
+require 'web/api/auth/admin/web.php';
+require 'web/api/panel/admin/web.php';
+
+// Web guard
+require 'web/api/auth/client/web.php';
+require 'web/api/panel/client/web.php';
+
+// Page
+require 'web/api/page/web.php';
+
+// Storage
+include 'storage/img.php';
+
+// Testing
+// include 'storage/notifications.php';
+
+// Laravel api
 // ...
 
-// Vue routes
+// Vue
 Route::get('/', function () {
-    return view('vue');
+	return view('vue');
 });
 
-// Vue Last route
+// Vue catchall
 if (!app()->runningUnitTests()) {
-	Route::fallback(function() {
-	    return view('vue');
+	Route::fallback(function () {
+		return view('vue');
 	});
 }

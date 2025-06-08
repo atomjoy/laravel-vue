@@ -1,0 +1,62 @@
+.page_subscribe {
+	display: block;
+	margin: 50px auto;
+	width: 90%;
+	max-width: 480px;
+	overflow: hidden;
+}
+
+.page_message {
+	float: left;
+	width: 100%;
+	padding: 15px;
+	margin-bottom: 20px;
+	color: #5c5;
+	border: 1px solid #5c5;
+	border-radius: var(--border-radius);
+}
+
+.page_error {
+	color: #f25;
+	border: 1px solid #f25;
+}
+
+.page_subscribe input {
+	float: left;
+	width: 100%;
+	padding: 15px 20px;
+	font-size: 16px;
+	letter-spacing: 1px;
+	color: var(--text-1);
+	background: var(--input-bg);
+	border: 1px solid var(--input-border);
+	border-radius: var(--border-radius);
+	font-family: var(--font-family);
+	line-height: 24px;
+}
+
+.page_subscribe input::placeholder {
+	color: var(--input-label) !important;
+}
+
+.page_subscribe i {
+	cursor: pointer;
+	float: right;
+	width: 100%;
+	margin-top: 20px;
+	padding: 15px 20px;
+	color: #fff;
+	background: var(--accent);
+	border-radius: var(--border-radius);
+	border: 1px solid var(--accent-hover);
+	line-height: 24px;
+}
+
+.page_subscribe i:hover {
+	background: var(--accent-hover);
+}
+
+.page_subscribe i span {
+	margin-left: 20px;
+	font-family: var(--font-family);
+}

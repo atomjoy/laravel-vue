@@ -1,4 +1,6 @@
 import HomeView from '@/views/page/HomeView.vue';
+import subscribe from './subscribe';
+import docs from './docs';
 
 // Page routes
 const routes = [
@@ -19,6 +21,18 @@ const routes = [
 		name: 'about',
 		component: () => import('@/views/page/AboutView.vue'),
 	},
+	{
+		path: '/contact',
+		name: 'contact',
+		component: () => import('@/views/page/ContactView.vue'),
+	},
+	{
+		path: '/faqs',
+		name: 'faqs',
+		component: () => import('@/views/page/FaqsView.vue'),
+	},
+	...subscribe,
+	...docs,
 ];
 
 export default routes;

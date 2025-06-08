@@ -30,7 +30,14 @@ nav {
 	font-size: 14px;
 }
 
-.router_link_active {
-	color: #fff;
-	background: var(--accent);
+.logo_wrapper {
+	float: left;
+	height: auto;
+	width: auto;
+}
+
+.logo_wrapper_image {
+	float: left;
+	max-height: 50px;
+	content: var(--logo);
 }

@@ -1,0 +1,109 @@
+@import url('@/assets/css/auth/form.css');
+
+/* Login page */
+
+.split_layout {
+	float: left;
+	width: 100%;
+	color: var(--text-1);
+	font-family: var(--font-family);
+}
+
+.split_layout_left {
+	float: left;
+	width: 50%;
+	overflow: hidden;
+	padding: 20px;
+}
+
+.split_layout_right {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.split_layout_image {
+	float: left;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+/* simple layout */
+
+.simple_layout {
+	float: left;
+	width: 100%;
+	color: var(--text-1);
+	font-family: var(--font-family);
+}
+
+.simple_layout_content {
+	float: left;
+	width: 100%;
+	padding: 20px;
+}
+
+.simple_layout_footer {
+	float: left;
+	width: 100%;
+	padding: 0px;
+}
+
+/* login form */
+
+.login_form_wrapper {
+	float: left;
+	width: 100%;
+}
+
+.login_form {
+	margin: 50px auto;
+	width: 90%;
+	height: auto;
+	padding: 20px;
+	max-width: 460px;
+	overflow: hidden;
+	box-sizing: border-box;
+	transition: all 0.6s;
+}
+
+/* Login page admin */
+
+.button__admin {
+	float: left;
+	width: 100%;
+	padding: 13px 20px;
+	color: #fff;
+	line-height: 1.5;
+	letter-spacing: 1px;
+	font-weight: 600;
+	font-size: var(--font-size);
+	background: #ff303c;
+	border: 1px solid #ff303c;
+	border-radius: var(--button-radius);
+	transition: all 0.6s;
+	cursor: pointer;
+}
+
+.button__admin:hover {
+	background: #f00;
+}
+
+.form-checkbox-checkmark svg {
+	background: #f00;
+	border-color: #f00;
+}
+
+@media all and (max-width: 768px) {
+	.split_layout_left {
+		width: 100%;
+	}
+	.split_layout_right {
+		display: none;
+	}
+}

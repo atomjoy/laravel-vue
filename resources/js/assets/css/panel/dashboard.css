@@ -1,0 +1,80 @@
+.dashboard {
+	float: left;
+	width: 100%;
+	height: auto;
+	min-height: 100vh;
+	padding: var(--panel-padding-inline);
+	background: var(--bg-1);
+}
+
+.dashboard_user {
+	float: left;
+	width: 100%;
+	display: flex;
+	gap: var(--panel-padding-inline);
+	align-items: stretch;
+	justify-content: space-between;
+}
+
+.dashboard_user_info {
+	float: left;
+	width: 100%;
+	color: #fff;
+	background: url('/default/dashboard/dashboard-user-bg.webp');
+	background-position: center;
+	background-size: cover;
+	margin-bottom: var(--panel-padding-inline);
+	padding: var(--panel-padding-inline);
+	border-radius: var(--border-radius);
+	border: 0px solid var(--border);
+}
+
+.dashboard_user_info_text {
+	font-weight: 700;
+	font-size: 30px;
+	margin-bottom: 50px;
+}
+
+.dashboard_user_info_name {
+	font-weight: 400;
+	font-size: 21px;
+}
+
+.dashboard_user_info_email {
+	font-weight: 400;
+	font-size: 16px;
+}
+
+.dashboard_user_events {
+	float: left;
+	width: 50%;
+	margin-bottom: var(--panel-padding-inline);
+	padding: var(--panel-padding-inline);
+	border-radius: var(--border-radius);
+	border: 1px solid var(--border);
+}
+
+.dashboard_user_events_count {
+	margin-top: 50px;
+	font-size: 35px;
+}
+
+.dashboard_user_events_icon svg {
+	height: 30px;
+	width: 30px;
+}
+
+.dashboard_user_events_icon svg * {
+	stroke: var(--text-1);
+}
+
+@media all and (max-width: 768px) {
+	.dashboard_user {
+		float: left;
+		width: 100%;
+		display: block;
+	}
+	.dashboard_user_events {
+		width: 100%;
+	}
+}

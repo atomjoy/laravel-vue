@@ -1,0 +1,134 @@
+.notify_item {
+	float: left;
+	width: 100%;
+	padding: 20px;
+	border-bottom: 1px solid var(--border);
+}
+
+.notify_bar {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+.notify_owner {
+	float: left;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.notify_owner_avatar {
+	float: left;
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.notify_owner_avatar_image {
+	width: 100%;
+	height: 100%;
+}
+
+.notify_owner_name {
+	font-weight: 600;
+	font-size: 16px;
+}
+
+.notify_owner_date {
+	color: var(--text-3);
+	font-size: 13px;
+}
+
+.notify_message {
+	float: left;
+	width: 100%;
+	padding: 15px;
+	margin-bottom: 10px;
+	background: var(--bg-1);
+	border: 1px solid var(--border);
+	border-radius: var(--border-radius);
+}
+
+.notify_title {
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+	font-weight: 600;
+	font-size: 15px;
+}
+
+.notify_text {
+	float: left;
+	width: 100%;
+	font-size: 14px;
+}
+
+.notify_links {
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.notify_link {
+	float: left;
+	margin-right: 10px;
+	padding: 5px 15px;
+	font-size: 14px;
+	color: #fff;
+	background: var(--accent);
+	border-radius: var(--border-radius);
+}
+
+.notify_link:hover {
+	color: var(--bg-1);
+	background: var(--text-1);
+}
+
+.notify_del_icon {
+	float: right;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+
+.notify_del_icon * {
+	stroke: var(--text-2);
+}
+
+.notify_del_icon:hover * {
+	stroke: #f25 !important;
+}
+
+.notify_item_dot {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 5px;
+	height: 100%;
+	background: #f25;
+	box-shadow: 0px 2px 5px #f236;
+	border: 1px solid #f25;
+	cursor: pointer;
+}
+
+.notify_item_read .notify_item_dot {
+	background: var(--bg-1) !important;
+	border: 1px solid var(--divider);
+	box-shadow: none;
+}
+
+.notify_empty_list {
+	float: left;
+	width: 100%;
+	padding: 20px;
+	font-weight: 500;
+	text-align: center;
+	color: var(--text-2);
+	background: var(--bg-2);
+}

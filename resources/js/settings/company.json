@@ -1,0 +1,42 @@
+{
+	"name": "Company Name",
+	"desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam error unde soluta debitis, sapiente eius dolore qui voluptatibus harum tempora doloribus nobis impedit non voluptate natus nulla voluptates cupiditate enim!",
+	"country": "Poland",
+	"city": "00200 Warsaw",
+	"street": "Platynowa 125",
+	"mobile": "+48 100 200 300",
+	"email": "hello@example.com",
+	"website": "example.com",
+	"website_url": "https://example.com",
+	"open_time": "Monday - Friday: 10:00 - 15:00",
+	"map_lat": 52.22977,
+	"map_lng": 21.01178,
+	"map_logo": "https://app.test/default/logo/logo-light.png",
+	"socials": [
+		{
+			"title": "Social facebook",
+			"url": "https://facebook.com/username",
+			"icon": "facebook"
+		},
+		{
+			"title": "Social github",
+			"url": "https://github.com/username",
+			"icon": "github"
+		},
+		{
+			"title": "Social instagram",
+			"url": "https://instagram.com/username",
+			"icon": "instagram"
+		},
+		{
+			"title": "Social youtube",
+			"url": "https://youtube.com/@username",
+			"icon": "youtube"
+		},
+		{
+			"title": "Social linkedin",
+			"url": "https://linkedin.com/username",
+			"icon": "linkedin"
+		}
+	]
+}

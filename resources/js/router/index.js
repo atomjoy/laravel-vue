@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/auth.js';
 import authRoutes from './auth';
 import pageRoutes from './page';
 import panelRoutes from './panel';
 
 const router = createRouter({
-	linkActiveClass: 'router_link_active',
-	linkExactActiveClass: 'router_link_exact_active',
+	linkActiveClass: 'router-link-active',
+	linkExactActiveClass: 'router-link-exact-active',
 	history: createWebHistory('/'),
 	routes: [
 		...pageRoutes,
@@ -26,17 +26,66 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
 	// ✅ This will work make sure the correct store is used for the current running app
 	const auth = useAuthStore();
-	// ✅ Login with remember me token and/or check is user authenticated
-	await auth.isAuthenticated();
-	// ✅ Redirect to panel if logged
-	if (to.name == 'login' && auth.isLoggedIn.value) {
-		next({ name: 'panel' });
-	} else if (to.meta.requiresAuth && !auth.isLoggedIn.value) {
-		// ✅ Redirect to login if not logged
-		next({ name: 'login', query: { redirected_from: to.fullPath } });
+
+	// Admin login
+	if (to.meta.adminRoute) {
+		// ✅ Login with remember me token and/or check is user authenticated
+		await auth.isAuthenticatedAdmin();
+		// ✅ Redirect to admin panel if logged
+		if (to.name == 'admin.login' && auth.isLoggedIn.value) {
+			next({ name: 'admin.panel' });
+		}
+	}
+
+	// Admin or User
+	if (to.meta.requiresAdmin) {
+		// ✅ Login with remember me token and/or check is user authenticated
+		await auth.isAuthenticatedAdmin();
+		// ✅ Redirect to admin panel if logged
+		if (to.name == 'admin.login' && auth.isLoggedIn.value) {
+			// Panel route name here: panel or client.panel
+			next({ name: 'admin.panel' });
+		} else if (to.meta.requiresAdmin && !auth.isLoggedIn.value) {
+			// ✅ Redirect to login if not logged
+			next({
+				name: 'admin.login',
+				query: { redirected_from: to.fullPath },
+			});
+		} else {
+			// ✅ If roles required
+			if (to.meta.hasRole) {
+				// ✅ Check allowed roles
+				for (let i = 0; i < to.meta.hasRole.length; i++) {
+					const role = to.meta.hasRole[i];
+					// ✅ Allow if has role
+					if (auth.hasRole(role, 'admin')) {
+						// ✅ Continue
+						next();
+					}
+				}
+				// ✅ Has't role redirect
+				next({ name: 'admin.panel' });
+			}
+			// ✅ Continue
+			next();
+		}
 	} else {
-		// ✅ Continue
-		next();
+		// ✅ Login with remember me token and/or check is user authenticated
+		await auth.isAuthenticated();
+		// ✅ Redirect to panel if logged
+		if (to.name == 'login' && auth.isLoggedIn.value) {
+			// Panel route name here: panel or client.panel
+			next({ name: 'panel' });
+		} else if (to.meta.requiresAuth && !auth.isLoggedIn.value) {
+			// ✅ Redirect to login if not logged
+			next({
+				name: 'login',
+				query: { redirected_from: to.fullPath },
+			});
+		} else {
+			// ✅ Continue
+			next();
+		}
 	}
 });
 

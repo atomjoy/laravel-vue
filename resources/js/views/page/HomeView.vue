@@ -1,12 +1,33 @@
 <script setup>
-import TopMenu from './TopMenu.vue';
+import ChangeDescription from '@/components/utils/head/ChangeDescription.vue';
+import ChangeTitle from '@/components/utils/head/ChangeTitle.vue';
+import Layout from '@/layouts/page/DefaultLayout.vue';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+
+onMounted(async () => {
+	// const { t, locale } = useI18n({ useScope: 'global' });
+	// const route = useRoute();
+	// const params = route.params;
+	// const message = ref('');
+	// try {
+	// 	let res = await axios.get('/web/api/page/load');
+	// 	message.value = t(res.data.message);
+	// } catch (err) {
+	// 	console.log(t(err.response.data.message));
+	// }
+});
 </script>
 
 <template>
-	<div class="section_padding">
-		<TopMenu />
+	<Layout title="Welcome" description="Our home page.">
+		<div class="page_wrapper">
+			<h1>{{ $t('Home') }}</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro incidunt sapiente, aspernatur saepe quasi facere illo animi velit iusto voluptate unde voluptatibus fugiat dolores nulla in quos dolore, temporibus nesciunt.</p>
+		</div>
+	</Layout>
 
-		<h1>{{ $t('Home - SPA Router') }}</h1>
-		<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia neque repellat distinctio ullam voluptas obcaecati odio, ab beatae cumque mollitia earum suscipit dolore blanditiis sit explicabo similique molestias cupiditate? Molestias?</p>
-	</div>
+	<ChangeTitle :title="$t('Welcome')" />
+	<ChangeDescription :description="$t('Our home page.')" />
 </template>
