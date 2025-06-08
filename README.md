@@ -23,7 +23,7 @@ php artisan serve --host=localhost --port=8000
 Uwierzytelnianie wieloskładnikowe (F2A), panel Klienta
 i Administratora na oddzielnych modelach z oddzielnymi
 formularzami logowania (multi guards auth).
-Zaimplementowany formularz kontaktowy i zapisywanie
+Zaimplementowany formularz kontaktowy z mapą google i zapisywanie
 do newslettera przez formularz na stronie z
 potwierdzeniem subskrypcji przez wiadomość e-mail.
 
