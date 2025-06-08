@@ -20,11 +20,25 @@ php artisan serve --host=localhost --port=8000
 
 ## Dev
 
+Uwierzytelnianie wieloskładnikowe (F2A), panel Klienta
+i Administratora na oddzielnych modelach z oddzielnymi
+formularzeami logowania (multi guards auth).
+Zaimplementowany formularz kontaktowy i zapisywanie
+do newslettera przez formularz na stronie z
+potwierdzeniem subskrypcji przez wiadomość e-mail.
+
 ### Zainstalowane pakiety
 
 ```sh
 composer create-project laravel/laravel:^12 vue
 
+# Php
+"laravel/framework": "^12.0",
+"spatie/laravel-permission": "^6.19"
+"intervention/image": "^3.11",
+"atomjoy/proton": "^4.1",
+
+# Js
 npm install
 npm install vue@latest
 npm install --save-dev @vitejs/plugin-vue
