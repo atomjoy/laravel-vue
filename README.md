@@ -18,6 +18,26 @@ php artisan migrate:fresh --seed
 php artisan serve --host=localhost --port=8000
 ```
 
+## Login
+
+Dodawane do bazy danych przy tworzeniu i populacji tabel (seeders).
+
+```sh
+/login
+user@example.com
+Password123#
+
+/admin/login
+superadmin@example.com
+Password123#
+
+admin@example.com
+Password123#
+
+writer@example.com
+Password123#
+```
+
 ## Panel
 
 <img src="https://github.com/atomjoy/laravel-vue/blob/main/screenshots/admin-users.png" width="100%">
