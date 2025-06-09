@@ -18,6 +18,10 @@ php artisan migrate:fresh --seed
 php artisan serve --host=localhost --port=8000
 ```
 
+## Panel
+
+<img src="https://github.com/atomjoy/laravel-vue/blob/main/screenshots/admin-users.png" width="100%">
+
 ## Dev
 
 Uwierzytelnianie wieloskładnikowe (F2A), panel Klienta
