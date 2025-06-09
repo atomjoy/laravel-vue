@@ -1,19 +1,19 @@
 <script setup>
-import Group from '@/components/panel/admin/subscribers/GroupList.vue';
-import Layout from '@/components/panel/admin/subscribers/Layout.vue';
-import ListRow from '@/components/panel/admin/subscribers/ListRow.vue';
+import Layout from '@/components/panel/admin/users/Layout.vue';
+import ListRow from '@/components/panel/admin/users/ListRow.vue';
+import Group from '@/components/panel/admin/users/GroupList.vue';
 import Paginate from '@/components/panel/admin/Paginate.vue';
 import { useRoute } from 'vue-router';
 import { onMounted, watch } from 'vue';
-import { useItemStore } from '@/stores/admin/subscribers.js';
+import { useItemStore } from '@/stores/admin/users.js';
 
 const store = useItemStore();
 const route = useRoute();
 
-onMounted(async () => {
+onMounted(() => {
 	store.clearError();
 	store.current_page = route.query.page ?? 1;
-	await store.loadList();
+	store.loadList();
 });
 
 watch(
@@ -27,13 +27,14 @@ watch(
 
 <template>
 	<Layout :message="store.getMessage" :error="store.getError">
-		<Group title="Subscribers" desc="List of subscribers.">
+		<Group title="Users" desc="Customers list.">
 			<table class="panel_table_list">
 				<tr class="panel_list_header">
 					<th scope="col" class="panel_list_title">{{ $t('ID') }}</th>
-					<th scope="col" class="panel_list_title" style="min-width: 40%">{{ $t('Email') }}</th>
+					<th scope="col" class="panel_list_title">{{ $t('Image') }}</th>
 					<th scope="col" class="panel_list_title">{{ $t('Name') }}</th>
-					<th scope="col" class="panel_list_title">{{ $t('Approved') }}</th>
+					<th scope="col" class="panel_list_title">{{ $t('Email') }}</th>
+					<th scope="col" class="panel_list_title">{{ $t('2FA') }}</th>
 					<th scope="col" class="panel_list_title panel_list_title_last">{{ $t('Action') }}</th>
 				</tr>
 

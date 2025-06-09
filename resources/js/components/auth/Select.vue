@@ -1,7 +1,7 @@
 <template>
 	<div class="validator_wrapper">
 		<div class="input_wrapper">
-			<select :name="props.name" class="select_wrapper_field" v-model="model">
+			<select :name="props.name" :disabled="props.disabled" class="select_wrapper_field" v-model="model">
 				<option value="null">
 					{{ $t('Choose') }}
 				</option>
@@ -20,6 +20,7 @@ const props = defineProps({
 	name: { type: String, default: 'category_id' },
 	options: { type: Array, default: [] },
 	fixed: { type: Number, default: 0 },
+	disabled: { type: Boolean, default: false },
 });
 
 function fixValue(val) {

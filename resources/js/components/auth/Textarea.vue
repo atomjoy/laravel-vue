@@ -1,7 +1,7 @@
 <template>
 	<div class="validator_wrapper">
 		<div class="textarea_wrapper">
-			<textarea ref="input" class="textarea_wrapper_field" :class="props.class" :name="props.name" :placeholder="props.placeholder" v-model="model" />
+			<textarea ref="input" class="textarea_wrapper_field" :class="props.class" :name="props.name" :placeholder="props.placeholder" :disabled="props.disabled" v-model="model" />
 		</div>
 	</div>
 </template>
@@ -14,6 +14,7 @@ const props = defineProps({
 	focus: { type: Boolean, default: false },
 	placeholder: { type: String, default: '' },
 	class: { type: String, default: '' },
+	disabled: { type: Boolean, default: false },
 });
 let input = ref(null);
 

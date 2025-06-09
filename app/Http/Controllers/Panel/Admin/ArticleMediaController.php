@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel\Admin;
 
 use App\Models\Panel\ArticleMedia;
+use App\Exceptions\JsonException;
 use App\Http\Requests\Panel\Admin\StoreArticleMediaRequest;
 use App\Http\Requests\Panel\Admin\UpdateArticleMediaRequest;
 use App\Http\Resources\Panel\Admin\ArticleMediaCollection;

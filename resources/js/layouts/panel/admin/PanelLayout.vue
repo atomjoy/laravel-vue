@@ -1,7 +1,7 @@
 <script setup>
-import NavbarLeft from '@/components/panel/admin/NavbarLeft/NavbarLeft.vue';
-import NavbarTop from '@/components/panel/admin/NavbarTop/NavbarTop.vue';
-import NavbarFooter from '@/components/panel/admin/NavbarFooter/NavbarFooter.vue';
+import NavbarLeft from '@/components/panel/admin/navbarleft/NavbarLeft.vue';
+import NavbarTop from '@/components/panel/admin/navbartop/NavbarTop.vue';
+import Footer from '@/components/panel/Footer.vue';
 
 const props = defineProps({
 	title: { type: String, default: 'Dashboard' },
@@ -22,7 +22,7 @@ const props = defineProps({
 
 		<div class="panel_layout_footer">
 			<slot name="footer">
-				<NavbarFooter />
+				<Footer />
 			</slot>
 		</div>
 	</div>

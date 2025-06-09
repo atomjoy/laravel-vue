@@ -1,3 +1,4 @@
+import users from './users.js';
 import contacts from './contacts.js';
 import settings from './settings.js';
 import subscribers from './subscribers.js';
@@ -9,6 +10,7 @@ const routes = [
 	...contacts,
 	...articlemedia,
 	...subscribers,
+	...users,
 	// Redirect
 	{
 		path: '/admin',
@@ -33,13 +35,6 @@ const routes = [
 		name: 'admin.roles',
 		component: () => import('@/views/panel/admin/roles/RolesView.vue'),
 		meta: { requiresAdmin: true, hasRole: ['super_admin'] },
-	},
-	// Users
-	{
-		path: '/admin/users',
-		name: 'admin.users',
-		component: () => import('@/views/panel/admin/users/UsersView.vue'),
-		meta: { requiresAdmin: true, hasRole: ['super_admin', 'admin'] },
 	},
 ];
 

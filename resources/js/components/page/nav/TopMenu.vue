@@ -1,8 +1,8 @@
 <script setup>
 import IconHamburger from '@/assets/icons/IconHamburger.vue';
 import IconClose from '@/assets/icons/IconClose.vue';
-import { ref } from 'vue';
 import TopMenuLinks from './TopMenuLinks.vue';
+import { ref } from 'vue';
 
 const open = ref(false);
 

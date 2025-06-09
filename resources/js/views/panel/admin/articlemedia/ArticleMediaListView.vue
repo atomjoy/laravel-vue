@@ -2,6 +2,7 @@
 import Layout from '@/components/panel/admin/articlemedia/Layout.vue';
 import ListRow from '@/components/panel/admin/articlemedia/ListRow.vue';
 import Group from '@/components/panel/admin/articlemedia/GroupList.vue';
+import Paginate from '@/components/panel/admin/Paginate.vue';
 import { useRoute } from 'vue-router';
 import { onMounted, watch } from 'vue';
 import { useItemStore } from '@/stores/admin/articlemedia.js';
@@ -47,13 +48,7 @@ watch(
 				</tr>
 			</table>
 
-			<div class="panel_list_links" v-if="store.list.length > 0">
-				<div class="panel_paginate_link" @click="store.prevPage" v-if="store.current_page > 1"><</div>
-				<div class="panel_paginate_link panel_paginate_link_active">
-					{{ store.current_page }}
-				</div>
-				<div class="panel_paginate_link" @click="store.nextPage" v-if="store.current_page < store.last_page">></div>
-			</div>
+			<Paginate :store="store" />
 		</Group>
 	</Layout>
 </template>

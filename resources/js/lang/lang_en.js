@@ -43,7 +43,7 @@ const en = {
 	},
 	error404: {
 		title: 'Page not found!',
-		message: 'The page you are looking for does not exists or has been removed.',
+		message: 'The page you are looking for does not exists or has been removed',
 		button: 'Go Back',
 	},
 	docs: {
@@ -54,13 +54,13 @@ const en = {
 	},
 	change_email: {
 		Confirm: 'Email confirmation',
-		Description: 'Insert valid confirmation code.',
+		Description: 'Insert valid confirmation code',
 		Welcome_text: '',
 	},
 	logout: {
 		good_bye: 'Good Bye!',
-		title: 'Wait for a while.',
-		message: 'You will be logged out in a moment.',
+		title: 'Wait for a while',
+		message: 'You will be logged out in a moment',
 		button: 'Homepage',
 	},
 	login: {
@@ -77,8 +77,8 @@ const en = {
 		F2a_Confirm: 'Code confirmation',
 		F2a_code: 'Your confirmation code',
 		F2a_code_eg: 'Enter code',
-		Welcome_text_f2a: 'Enter the code from the email.',
-		Welcome_text: 'We are glad you are back.',
+		Welcome_text_f2a: 'Enter the code from the email',
+		Welcome_text: 'We are glad you are back',
 		Sign_In_Github: 'Sign in with Github',
 		Sign_In_Google: 'Sign in with Google',
 		Sign_In_Or: 'or sign in with email',
@@ -88,9 +88,9 @@ const en = {
 		Sign_In_With_Social: 'Or Continue With',
 		Confirm_btn: 'Confirm',
 		Login_admin: 'Admin Panel',
-		Welcome_text_admin: 'Welcome back to the admin panel.',
+		Welcome_text_admin: 'Welcome back to the admin panel',
 		F2a_Confirm_admin: 'Admin 2FA',
-		Welcome_text_f2a_admin: 'Enter the code from the email.',
+		Welcome_text_f2a_admin: 'Enter the code from the email',
 	},
 	register: {
 		Register: 'Register',
@@ -118,9 +118,9 @@ const en = {
 		Send_password: 'Send',
 		Have_an_account: 'Have an account?',
 		Dont_have_an_account: "Don't have an account?",
-		Welcome_text: 'Change or reset your password.',
+		Welcome_text: 'Change or reset your password',
 		Reset_password_admin: 'Admin Password Reset',
-		Welcome_text_admin: 'Reset your password.',
+		Welcome_text_admin: 'Reset your password',
 	},
 	change_password: {
 		Change_password: 'Change password',
@@ -130,14 +130,14 @@ const en = {
 		Confirm_password: 'Confirm password',
 		Have_an_account: 'Have an account?',
 		Forgot_password: 'Forgot password?',
-		Welcome_text: 'Change your password.',
+		Welcome_text: 'Change your password',
 	},
 	activate: {
 		Activation: 'Activation',
-		Description: 'If something went wrong try to reset password.',
+		Description: 'If something went wrong try to reset password',
 		Forgot_password: 'Forgot password?',
 		Have_an_account: 'Have an account?',
-		Welcome_text: 'Activation of access to the account.',
+		Welcome_text: 'Activation of access to the account',
 	},
 	menu: {
 		left: {
@@ -208,6 +208,8 @@ const en = {
 			logout: 'Logout',
 		},
 	},
+	'remove.image.success': 'Image has been deleted',
+	'remove.image.error': 'Image has not been deleted',
 };
 
 export default en;

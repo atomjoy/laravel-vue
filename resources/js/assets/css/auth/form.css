@@ -242,6 +242,18 @@
 	color: var(--input-label);
 }
 
+.label_subtitle {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: auto;
+	font-weight: 500;
+	margin-top: 15px;
+	padding-bottom: 10px;
+	color: var(--text-1);
+	border-bottom: 1px dashed var(--divider);
+}
+
 .button_wrapper {
 	float: left;
 	width: 100%;

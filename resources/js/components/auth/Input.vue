@@ -1,14 +1,7 @@
 <template>
 	<div class="validator_wrapper">
 		<div class="input_wrapper">
-			<input
-				ref="input"
-				class="input_wrapper_field"
-				:type="props.type"
-				:name="props.name"
-				:placeholder="props.placeholder"
-				v-model="model"
-			/>
+			<input ref="input" class="input_wrapper_field" :type="props.type" :name="props.name" :placeholder="props.placeholder" :disabled="props.disabled" v-model="model" />
 			<div class="input_wrapper_icon input_wrapper_icon_left">
 				<slot>
 					<IconEdit />
@@ -29,6 +22,7 @@ const props = defineProps({
 	type: { type: String, default: 'text' },
 	focus: { type: Boolean, default: false },
 	placeholder: { type: String, default: '' },
+	disabled: { type: Boolean, default: false },
 });
 
 let input = ref(null);

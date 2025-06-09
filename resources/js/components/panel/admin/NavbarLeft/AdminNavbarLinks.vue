@@ -1,5 +1,5 @@
 <script setup>
-import NavbarLink from '@/components/panel/admin/NavbarLeft/NavbarLink.vue';
+import NavbarLink from '@/components/panel/admin/navbarleft/NavbarLink.vue';
 import IconAlbum from '@/assets/icons/IconAlbum.vue';
 import IconContact from '@/assets/icons/IconContact.vue';
 import IconRoles from '@/assets/icons/IconRoles.vue';

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\Admin\NotificationsController as AdminNotification
 use App\Http\Controllers\Panel\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Panel\Admin\ArticleMediaController as AdminArticleMediaController;
 use App\Http\Controllers\Panel\Admin\SubscriberController as AdminSubscriberController;
+use App\Http\Controllers\Panel\Admin\UserController as AdminUserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 	'auth:admin',
 ])->group(function () {
 
-	// Only superadmin, admin, writer
+	// Roles: superadmin, admin, writer
 	Route::middleware([
 		'role:writer|admin|super_admin,admin',
 	])->group(function () {
@@ -43,7 +44,7 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 		Route::get('articlemedia/remove/{articlemedia}', [AdminArticleMediaController::class, 'remove']);
 	});
 
-	// Only superadmin, admin
+	// Roles: superadmin, admin
 	Route::middleware([
 		'role:admin|super_admin,admin',
 	])->group(function () {
@@ -55,13 +56,14 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 		Route::get('subscribers/export/csv', [AdminSubscriberController::class, 'csv']);
 	});
 
-	// Only superadmin
+	// Roles: superadmin
 	Route::middleware([
 		'role:super_admin,admin',
 	])->group(function () {
-		Route::get('users', function () {
-			return response()->json(['message' => 'Users']);
-		});
+		// Users
+		Route::resource('users', AdminUserController::class)->except(['create', 'edit']);
+		Route::get('users/remove/{user}', [AdminUserController::class, 'remove']);
+
 		Route::get('roles', function () {
 			return response()->json(['message' => 'Roles']);
 		});

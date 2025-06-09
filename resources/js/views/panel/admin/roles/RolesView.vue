@@ -5,7 +5,7 @@ import PanelLayout from '@/layouts/panel/admin/PanelLayout.vue';
 <template>
 	<PanelLayout title="Roles">
 		<!-- Page content goes here -->
-		Roles
+		<p style="padding-inline: 25px">{{ $t('Not implemented.') }}</p>
 		<!-- Page content goes here -->
 	</PanelLayout>
 </template>
