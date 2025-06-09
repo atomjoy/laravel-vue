@@ -7,13 +7,19 @@ import YesNo from '@/components/auth/YesNo.vue';
 import Subtitle from '@/components/auth/Subtitle.vue';
 import Group from '@/components/panel/admin/users/Group.vue';
 import Layout from '@/components/panel/admin/users/Layout.vue';
-import { onMounted } from 'vue';
+import NoRecords from '@/components/utils/alerts/NoRecords.vue';
+// import user_roles from '@/settings/panel/user_roles.json';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useItemStore } from '@/stores/admin/users.js';
 
 const store = useItemStore();
 const route = useRoute();
 const id = route.params.id;
+// const add_role = ref(null);
+// const remove_role = ref(null);
+// const allowed_roles = user_roles.roles;
+// const allowed_permissions = user_roles.permissions;
 
 onMounted(async () => {
 	store.clearError();
@@ -73,28 +79,20 @@ function onSubmit(e) {
 
 		<Group title="Roles and permissions" desc="Here you can see your permissions.">
 			<Subtitle text="Roles" />
-
 			<div v-for="r in store.item.roles" class="panel_admin_role">
 				<div class="panel_role_name">{{ r.name }}</div>
 				<div class="panel_role_id" title="ID">{{ r.id }}</div>
 				<div class="panel_role_guard" title="GUARD">{{ r.guard_name }}</div>
 			</div>
-
-			<div class="panel_list_empty" v-if="store.item.roles.length == 0">
-				{{ $t('There are no records.') }}
-			</div>
+			<NoRecords :show="store.item.roles.length == 0" />
 
 			<Subtitle text="Permissions" />
-
 			<div v-for="r in store.item.permission" class="panel_admin_permission">
 				<div class="panel_permission_name">{{ r.name }}</div>
 				<div class="panel_permission_id" title="ID">{{ r.id }}</div>
 				<div class="panel_permission_guard" title="GUARD">{{ r.guard_name }}</div>
 			</div>
-
-			<div class="panel_list_empty" v-if="store.item.permission.length == 0">
-				{{ $t('There are no records.') }}
-			</div>
+			<NoRecords :show="store.item.permission.length == 0" />
 		</Group>
 	</Layout>
 </template>

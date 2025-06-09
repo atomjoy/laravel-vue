@@ -96,7 +96,7 @@ class AdminController extends Controller
 		Gate::authorize('delete', $admin);
 
 		try {
-			// Disable
+			// Disabled
 			return response()->json(['message' => 'Disabled']);
 
 			if (Storage::exists($admin->avatar)) {

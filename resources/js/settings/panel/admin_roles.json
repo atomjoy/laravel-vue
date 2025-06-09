@@ -1,0 +1,17 @@
+{
+	"roles": [
+		"writer",
+		"worker",
+		"admin"
+	],
+	"permissions": [
+		"article_view",
+		"article_create",
+		"article_update",
+		"article_delete",
+		"user_view",
+		"user_create",
+		"user_update",
+		"user_delete"
+	]
+}

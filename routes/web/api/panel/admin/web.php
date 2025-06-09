@@ -19,7 +19,6 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 	'locales',
 	'auth:admin',
 ])->group(function () {
-
 	// Roles: superadmin, admin, writer
 	Route::middleware([
 		'role:writer|admin|super_admin,admin',
@@ -70,6 +69,7 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 		Route::get('admins/remove/{admin}', [AdminController::class, 'remove']);
 		Route::post('admins/role', [AdminController::class, 'addRole']);
 		Route::post('admins/role/remove', [AdminController::class, 'removeRole']);
+		// TODO: Add admin permissions from panel
 		// Route::post('admins/permission', [AdminController::class, 'addPermission']);
 
 		// Roles

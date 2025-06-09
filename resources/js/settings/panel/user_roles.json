@@ -1,0 +1,11 @@
+{
+	"roles": [
+		"editor"
+	],
+	"permissions": [
+		"disable_login",
+		"disable_email",
+		"disable_avatar",
+		"disable_username"
+	]
+}

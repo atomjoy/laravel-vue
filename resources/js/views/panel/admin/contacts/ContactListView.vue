@@ -3,6 +3,7 @@ import Layout from '@/components/panel/admin/contacts/Layout.vue';
 import ListRow from '@/components/panel/admin/contacts/ListRow.vue';
 import Group from '@/components/panel/admin/contacts/GroupList.vue';
 import Paginate from '@/components/panel/admin/Paginate.vue';
+import TableNoRecords from '@/components/utils/alerts/TableNoRecords.vue';
 import { useRoute } from 'vue-router';
 import { onMounted, watch } from 'vue';
 import { useItemStore } from '@/stores/admin/contacts.js';
@@ -29,23 +30,21 @@ watch(
 	<Layout :message="store.getMessage" :error="store.getError">
 		<Group title="Contacts" desc="List of messages.">
 			<table class="panel_table_list">
-				<tr class="panel_list_header">
-					<th scope="col" class="panel_list_title">{{ $t('ID') }}</th>
-					<th scope="col" class="panel_list_title">{{ $t('Subject') }}</th>
-					<th scope="col" class="panel_list_title">{{ $t('Name') }}</th>
-					<th scope="col" class="panel_list_title">{{ $t('Contact') }}</th>
-					<th scope="col" class="panel_list_title panel_list_title_last">{{ $t('Action') }}</th>
-				</tr>
+				<tbody>
+					<tr class="panel_list_header">
+						<th scope="col" class="panel_list_title">{{ $t('ID') }}</th>
+						<th scope="col" class="panel_list_title">{{ $t('Subject') }}</th>
+						<th scope="col" class="panel_list_title">{{ $t('Name') }}</th>
+						<th scope="col" class="panel_list_title">{{ $t('Contact') }}</th>
+						<th scope="col" class="panel_list_title panel_list_title_last">{{ $t('Action') }}</th>
+					</tr>
 
-				<tr v-for="i in store.list" :key="i.id" class="panel_list_row" :class="'panel_list_row_' + i.id">
-					<ListRow :item="i" />
-				</tr>
+					<tr v-for="i in store.list" :key="i.id" class="panel_list_row" :class="'panel_list_row_' + i.id">
+						<ListRow :item="i" />
+					</tr>
 
-				<tr class="panel_list_empty" v-if="store.list.length == 0">
-					{{
-						$t('There are no records.')
-					}}
-				</tr>
+					<TableNoRecords :show="store.list.length == 0" />
+				</tbody>
 			</table>
 
 			<Paginate :store="store" />
