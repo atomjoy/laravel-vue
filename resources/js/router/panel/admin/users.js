@@ -23,13 +23,6 @@ const routes = [
 		component: () => import('@/views/panel/admin/users/UserEditView.vue'),
 		meta: { requiresAdmin: true, hasRole: ['super_admin'] },
 	},
-	// Users
-	// {
-	// 	path: '/admin/users',
-	// 	name: 'admin.users',
-	// 	component: () => import('@/views/panel/admin/users/UsersView.vue'),
-	// 	meta: { requiresAdmin: true, hasRole: ['super_admin', 'admin'] },
-	// },
 ];
 
 export default routes;

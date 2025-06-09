@@ -526,6 +526,13 @@
 }
 
 /* panel inputs */
+.panel_group {
+	float: left;
+	width: 100%;
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+
 .panel_group_form {
 	float: left;
 	width: 100%;
@@ -795,6 +802,43 @@
 	padding: 5px 10px;
 }
 
+.panel_admin_role,
+.panel_admin_permission {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	float: left;
+	width: 100%;
+	margin-top: 15px;
+	padding: 10px;
+	border: 1px dashed var(--input-border);
+	border-radius: var(--border-radius);
+}
+
+.panel_role_name {
+	float: left;
+	width: 180px;
+	padding: 5px 15px;
+	color: #5c5;
+	background: #5c51;
+	border: 1px solid #5c5;
+	border-radius: var(--border-radius);
+	font-size: 14px;
+	text-align: center;
+}
+
+.panel_permission_name {
+	float: left;
+	width: 180px;
+	padding: 5px 15px;
+	color: var(--accent);
+	background: var(--accent-alpha);
+	border-radius: var(--border-radius);
+	border: 1px solid var(--accent);
+	font-size: 14px;
+	text-align: center;
+}
+
 @media all and (max-width: 1024px) {
 	.navbar__open {
 		display: inherit;
@@ -842,7 +886,7 @@
 	}
 
 	.panel_list_avatar {
-		width: 100%;
+		width: 90px;
 		height: auto;
 	}
 

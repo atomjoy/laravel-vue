@@ -1,6 +1,6 @@
 <script setup>
 import Layout from '@/components/panel/admin/contacts/Layout.vue';
-import Group from '@/components/panel/admin/contacts/GroupList.vue';
+import Group from '@/components/panel/admin/contacts/Group.vue';
 import Label from '@/components/auth/Label.vue';
 import Input from '@/components/auth/Input.vue';
 import Button from '@/components/auth/Button.vue';

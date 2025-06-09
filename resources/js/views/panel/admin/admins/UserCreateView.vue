@@ -2,10 +2,10 @@
 import Label from '@/components/auth/Label.vue';
 import Input from '@/components/auth/Input.vue';
 import Button from '@/components/auth/Button.vue';
-import Group from '@/components/panel/admin/articlemedia/Group.vue';
-import Layout from '@/components/panel/admin/articlemedia/Layout.vue';
+import Group from '@/components/panel/admin/admins/Group.vue';
+import Layout from '@/components/panel/admin/admins/Layout.vue';
 import { onMounted } from 'vue';
-import { useItemStore } from '@/stores/admin/articlemedia.js';
+import { useItemStore } from '@/stores/admin/admins.js';
 
 const store = useItemStore();
 
@@ -18,10 +18,12 @@ onMounted(async () => {
 
 <template>
 	<Layout :message="store.getMessage" :error="store.getError">
-		<Group title="Upload image" desc="Here you can upload image.">
+		<Group title="Admins" desc="Here you can create admin.">
 			<form action="post" @submit.prevent="store.createItem" enctype="multipart/form-data">
-				<Label text="Title" />
-				<Input name="title" />
+				<Label text="Name" />
+				<Input name="name" />
+				<Label text="Email" />
+				<Input name="email" />
 				<Label text="Image" />
 				<Input type="file" name="file" @change="store.getImagePath" />
 				<div class="panel_item_image" v-if="store.item_image">

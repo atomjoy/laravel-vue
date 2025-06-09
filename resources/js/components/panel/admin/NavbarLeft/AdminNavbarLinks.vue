@@ -40,8 +40,12 @@ const auth = useAuthStore();
 			<IconUser />
 		</NavbarLink>
 
-		<NavbarLink to="/admin/roles" text="Roles">
+		<NavbarLink to="/admin/admins" text="Admins">
 			<IconRoles />
 		</NavbarLink>
+
+		<!-- <NavbarLink to="/admin/roles" text="Roles">
+			<IconRoles />
+		</NavbarLink> -->
 	</div>
 </template>

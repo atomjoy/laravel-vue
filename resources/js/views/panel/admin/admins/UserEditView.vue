@@ -5,11 +5,11 @@ import Textarea from '@/components/auth/Textarea.vue';
 import Button from '@/components/auth/Button.vue';
 import YesNo from '@/components/auth/YesNo.vue';
 import Subtitle from '@/components/auth/Subtitle.vue';
-import Group from '@/components/panel/admin/users/Group.vue';
-import Layout from '@/components/panel/admin/users/Layout.vue';
+import Group from '@/components/panel/admin/admins/Group.vue';
+import Layout from '@/components/panel/admin/admins/Layout.vue';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { useItemStore } from '@/stores/admin/users.js';
+import { useItemStore } from '@/stores/admin/admins.js';
 
 const store = useItemStore();
 const route = useRoute();
@@ -28,7 +28,7 @@ function onSubmit(e) {
 
 <template>
 	<Layout :message="store.getMessage" :error="store.getError" :edit="true">
-		<Group title="Users" desc="Here you can edit user details.">
+		<Group title="Admins" desc="Here you can edit admin details.">
 			<form action="post" @submit.prevent="onSubmit" enctype="multipart/form-data">
 				<Label text="Name" />
 				<Input name="name" v-model="store.item.name" />

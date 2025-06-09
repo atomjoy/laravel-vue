@@ -20,7 +20,7 @@ const props = defineProps({
 	name: { type: String, default: 'category_id' },
 	options: { type: Array, default: [] },
 	fixed: { type: Number, default: 0 },
-	disabled: { type: Boolean, default: false },
+	disabled: { type: [String, Boolean], default: false },
 });
 
 function fixValue(val) {

@@ -16,3 +16,7 @@ app.use(i18n);
 app.use(stores);
 app.use(router);
 app.mount('#app');
+
+app.config.errorHandler = (err, instance, info) => {
+	// report error to tracking services
+};

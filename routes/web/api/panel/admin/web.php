@@ -9,6 +9,7 @@ use App\Http\Controllers\Panel\Admin\ContactController as AdminContactController
 use App\Http\Controllers\Panel\Admin\ArticleMediaController as AdminArticleMediaController;
 use App\Http\Controllers\Panel\Admin\SubscriberController as AdminSubscriberController;
 use App\Http\Controllers\Panel\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Panel\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,6 +65,11 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 		Route::resource('users', AdminUserController::class)->except(['create', 'edit']);
 		Route::get('users/remove/{user}', [AdminUserController::class, 'remove']);
 
+		// Admins
+		Route::resource('admins', AdminController::class)->except(['create', 'edit']);
+		Route::get('admins/remove/{admin}', [AdminController::class, 'remove']);
+
+		// Roles
 		Route::get('roles', function () {
 			return response()->json(['message' => 'Roles']);
 		});

@@ -3,7 +3,7 @@ import { defineStore, storeToRefs } from 'pinia';
 import router from '@/router';
 import axios from 'axios';
 
-export const useItemStore = defineStore('users', () => {
+export const useItemStore = defineStore('admins', () => {
 	// State
 	const error = ref(false);
 	const message = ref(null);
@@ -23,7 +23,7 @@ export const useItemStore = defineStore('users', () => {
 
 	// Actions
 	async function loadList() {
-		let res = await axios.get('/web/api/admin/users?page=' + current_page.value + '&perpage=' + perpage.value);
+		let res = await axios.get('/web/api/admin/admins?page=' + current_page.value + '&perpage=' + perpage.value);
 		list.value = res?.data?.data ?? [];
 		last_page.value = res?.data?.paginate.total_pages ?? 1;
 		current_page.value = res?.data?.paginate.current_page ?? 1;
@@ -33,7 +33,7 @@ export const useItemStore = defineStore('users', () => {
 	async function deleteItem(id) {
 		try {
 			if (confirm('Delete ?')) {
-				let res = await axios.delete('/web/api/admin/users/' + id);
+				let res = await axios.delete('/web/api/admin/admins/' + id);
 				setMessage(res);
 				// const row = document.querySelector('.panel_list_row_' + id);
 				// row.remove();
@@ -45,7 +45,7 @@ export const useItemStore = defineStore('users', () => {
 
 	async function createItem(e) {
 		try {
-			let res = await axios.post('/web/api/admin/users', new FormData(e.target));
+			let res = await axios.post('/web/api/admin/admins', new FormData(e.target));
 			setMessage(res);
 			resetForm(e);
 		} catch (err) {
@@ -57,7 +57,7 @@ export const useItemStore = defineStore('users', () => {
 	async function updateItem(id, data) {
 		try {
 			data.append('_method', 'PATCH');
-			let res = await axios.post('/web/api/admin/users/' + id, data);
+			let res = await axios.post('/web/api/admin/admins/' + id, data);
 			setMessage(res);
 		} catch (err) {
 			setError(err);
@@ -68,7 +68,7 @@ export const useItemStore = defineStore('users', () => {
 
 	async function loadItem(id) {
 		try {
-			let res = await axios.get('/web/api/admin/users/' + id);
+			let res = await axios.get('/web/api/admin/admins/' + id);
 			item.value = res?.data; // From UserResource with data.data
 		} catch (err) {
 			setError(err);
@@ -77,7 +77,7 @@ export const useItemStore = defineStore('users', () => {
 
 	async function removeImage(id) {
 		try {
-			let res = await axios.get('/web/api/admin/users/remove/' + id);
+			let res = await axios.get('/web/api/admin/admins/remove/' + id);
 			setMessage(res);
 			loadItem(id);
 		} catch (err) {

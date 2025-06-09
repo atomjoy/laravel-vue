@@ -1,4 +1,5 @@
 import users from './users.js';
+import admins from './admins.js';
 import contacts from './contacts.js';
 import settings from './settings.js';
 import subscribers from './subscribers.js';
@@ -11,6 +12,7 @@ const routes = [
 	...articlemedia,
 	...subscribers,
 	...users,
+	...admins,
 	// Redirect
 	{
 		path: '/admin',

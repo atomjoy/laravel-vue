@@ -34,11 +34,12 @@ router.beforeEach(async (to, from, next) => {
 		// ✅ Redirect to admin panel if logged
 		if (to.name == 'admin.login' && auth.isLoggedIn.value) {
 			next({ name: 'admin.panel' });
+			return false;
 		}
 	}
 
-	// Admin or User
 	if (to.meta.requiresAdmin) {
+		// Admin or User
 		// ✅ Login with remember me token and/or check is user authenticated
 		await auth.isAuthenticatedAdmin();
 		// ✅ Redirect to admin panel if logged
@@ -61,10 +62,12 @@ router.beforeEach(async (to, from, next) => {
 					if (auth.hasRole(role, 'admin')) {
 						// ✅ Continue
 						next();
+						return false;
 					}
 				}
 				// ✅ Has't role redirect
 				next({ name: 'admin.panel' });
+				return false;
 			}
 			// ✅ Continue
 			next();

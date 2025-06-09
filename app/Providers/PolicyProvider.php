@@ -14,6 +14,9 @@ use App\Policies\SubscriberPolicy;
 use App\Models\User;
 use App\Policies\UserPolicy;
 
+use App\Models\Admin;
+use App\Policies\AdminPolicy;
+
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,11 +36,12 @@ class PolicyProvider extends ServiceProvider
 	public function boot(): void
 	{
 		Gate::policy(User::class, UserPolicy::class);
+		Gate::policy(Admin::class, AdminPolicy::class);
 		Gate::policy(Contact::class, ContactPolicy::class);
 		Gate::policy(Subscriber::class, SubscriberPolicy::class);
 		Gate::policy(ArticleMedia::class, ArticleMediaPolicy::class);
 
 		// Register Policy custom model locations
-		// Gate::policy(Subscriber::class, SubscriberPolicy::class);
+		// Gate::policy(Model::class, ModelPolicy::class);
 	}
 }

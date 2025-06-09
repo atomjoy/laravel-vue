@@ -1,7 +1,7 @@
 <script setup>
 let props = defineProps({
 	message: { type: String, default: null },
-	error: { type: String, default: false },
+	error: { type: [String, Boolean], default: false },
 });
 </script>
 

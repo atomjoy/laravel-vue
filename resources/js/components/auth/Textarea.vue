@@ -14,7 +14,7 @@ const props = defineProps({
 	focus: { type: Boolean, default: false },
 	placeholder: { type: String, default: '' },
 	class: { type: String, default: '' },
-	disabled: { type: Boolean, default: false },
+	disabled: { type: [String, Boolean], default: false },
 });
 let input = ref(null);
 

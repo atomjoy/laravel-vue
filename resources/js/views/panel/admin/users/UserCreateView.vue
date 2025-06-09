@@ -2,7 +2,7 @@
 import Label from '@/components/auth/Label.vue';
 import Input from '@/components/auth/Input.vue';
 import Button from '@/components/auth/Button.vue';
-import Group from '@/components/panel/admin/users/GroupList.vue';
+import Group from '@/components/panel/admin/users/Group.vue';
 import Layout from '@/components/panel/admin/users/Layout.vue';
 import { onMounted } from 'vue';
 import { useItemStore } from '@/stores/admin/users.js';

@@ -22,7 +22,7 @@ const props = defineProps({
 	type: { type: String, default: 'text' },
 	focus: { type: Boolean, default: false },
 	placeholder: { type: String, default: '' },
-	disabled: { type: Boolean, default: false },
+	disabled: { type: [String, Boolean], default: false },
 });
 
 let input = ref(null);

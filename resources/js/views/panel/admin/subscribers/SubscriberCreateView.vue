@@ -1,5 +1,5 @@
 <script setup>
-import Group from '@/components/panel/admin/subscribers/GroupList.vue';
+import Group from '@/components/panel/admin/subscribers/Group.vue';
 import Layout from '@/components/panel/admin/subscribers/Layout.vue';
 import Label from '@/components/auth/Label.vue';
 import Input from '@/components/auth/Input.vue';
