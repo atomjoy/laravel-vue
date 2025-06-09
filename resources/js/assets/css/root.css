@@ -326,6 +326,16 @@ blockquote {
 	border-left: 5px solid var(--accent);
 }
 
+table {
+	table-layout: fixed;
+	min-width: 100%;
+}
+
+th,
+td {
+	word-break: break-all;
+}
+
 img,
 svg {
 	display: inline-block;

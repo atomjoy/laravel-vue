@@ -19,14 +19,10 @@ const props = defineProps({
 	<td>{{ item.firstname }} {{ item.lastname }}</td>
 	<td>
 		<div>
-			<a :href="'mailto:' + item.email" class="panel_list_item_link" target="_blank">
-				{{ item.email }}
-			</a>
+			<a :href="'mailto:' + item.email" class="panel_list_item_link" target="_blank">{{ item.email }}</a>
 		</div>
 		<div>
-			<a :href="'tel:' + item.mobile" class="panel_list_item_link" target="_blank">
-				{{ item.mobile }}
-			</a>
+			<a :href="'tel:' + item.mobile" class="panel_list_item_link" target="_blank">{{ item.mobile }}</a>
 		</div>
 	</td>
 	<td>

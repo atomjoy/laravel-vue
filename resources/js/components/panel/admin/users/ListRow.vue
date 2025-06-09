@@ -23,7 +23,12 @@ const props = defineProps({
 		{{ item.name }}
 	</td>
 	<td>
-		{{ item.email }}
+		<div>
+			<a :href="'mailto:' + item.email" class="panel_list_item_link" target="_blank">{{ item.email }}</a>
+		</div>
+		<div>
+			<a :href="'tel:+' + item.mobile_prefix + item.mobile" class="panel_list_item_link" target="_blank">+{{ item.mobile_prefix + ' ' + item.mobile }}</a>
+		</div>
 	</td>
 	<td>
 		<span v-if="item.f2a" class="span_btn span_btn_green">{{ $t('enabled') }}</span>
