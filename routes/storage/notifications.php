@@ -52,5 +52,9 @@ Route::get('/notify', function () {
 	$user->notifyNow(new UserNotification($msg2));
 	$user->notifyNow(new UserNotification($msg3));
 
+	$user = Admin::where('email', 'superadmin@example.com')->first();
+	$user->notifyNow(new UserNotification($msg2));
+	$user->notifyNow(new UserNotification($msg3));
+
 	return 'Created';
 });
