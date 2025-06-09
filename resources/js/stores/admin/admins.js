@@ -85,6 +85,35 @@ export const useItemStore = defineStore('admins', () => {
 		}
 	}
 
+	async function createRole(e) {
+		try {
+			let res = await axios.post('/web/api/admin/admins/role', new FormData(e.target));
+			console.log(res.data);
+			setMessage(res);
+		} catch (err) {
+			setError(err);
+		}
+	}
+
+	async function removeRole(e) {
+		try {
+			let res = await axios.post('/web/api/admin/admins/role/remove', new FormData(e.target));
+			console.log(res.data);
+			setMessage(res);
+		} catch (err) {
+			setError(err);
+		}
+	}
+
+	async function createPermission(e) {
+		try {
+			let res = await axios.post('/web/api/admin/admins/permission', new FormData(e.target));
+			setMessage(res);
+		} catch (err) {
+			setError(err);
+		}
+	}
+
 	function setPerpage(value) {
 		if (value < 5) {
 			perpage.value = 5;
@@ -149,6 +178,12 @@ export const useItemStore = defineStore('admins', () => {
 		// document.querySelector(id).scrollIntoView({behavior: 'smooth' });
 	}
 
+	function scrollTo(id = '.error_role') {
+		const el = document.querySelector(id);
+		const rect = el.getBoundingClientRect();
+		window.scrollTo({ top: rect.top + window.scrollY - 50, behavior: 'smooth' });
+	}
+
 	return {
 		message,
 		error,
@@ -165,6 +200,7 @@ export const useItemStore = defineStore('admins', () => {
 		resetForm,
 		clearError,
 		scrollTop,
+		scrollTo,
 		updateMessage,
 		updateError,
 		getImagePath,
@@ -177,5 +213,8 @@ export const useItemStore = defineStore('admins', () => {
 		setPerpage,
 		prevPage,
 		nextPage,
+		createPermission,
+		createRole,
+		removeRole,
 	};
 });

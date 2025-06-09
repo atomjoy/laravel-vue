@@ -485,6 +485,9 @@ const pl = {
 	'Here you can see your permissions.': 'Tutaj możesz zobaczyć swoje uprawnienia.',
 	'remove.image.success': 'Zdjęcie usunięte',
 	'remove.image.error': 'Zdjęcie nie usunięte',
+	'Add role': 'Dodaj rolę',
+	'Remove role': 'Usuń rolę',
+	'Add or remove admin role.': 'Dodaj lub usuń role',
 };
 
 export default pl;

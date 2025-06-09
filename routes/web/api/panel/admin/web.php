@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\Admin\NotificationsController as AdminNotification
 use App\Http\Controllers\Panel\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Panel\Admin\ArticleMediaController as AdminArticleMediaController;
 use App\Http\Controllers\Panel\Admin\SubscriberController as AdminSubscriberController;
-use App\Http\Controllers\Panel\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Panel\Admin\UserController;
 use App\Http\Controllers\Panel\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -62,12 +62,15 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 		'role:super_admin,admin',
 	])->group(function () {
 		// Users
-		Route::resource('users', AdminUserController::class)->except(['create', 'edit']);
-		Route::get('users/remove/{user}', [AdminUserController::class, 'remove']);
+		Route::resource('users', UserController::class)->except(['create', 'edit']);
+		Route::get('users/remove/{user}', [UserController::class, 'remove']);
 
 		// Admins
 		Route::resource('admins', AdminController::class)->except(['create', 'edit']);
 		Route::get('admins/remove/{admin}', [AdminController::class, 'remove']);
+		Route::post('admins/role', [AdminController::class, 'addRole']);
+		Route::post('admins/role/remove', [AdminController::class, 'removeRole']);
+		// Route::post('admins/permission', [AdminController::class, 'addPermission']);
 
 		// Roles
 		Route::get('roles', function () {

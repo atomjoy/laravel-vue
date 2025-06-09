@@ -1,28 +1,44 @@
 <script setup>
 import Label from '@/components/auth/Label.vue';
 import Input from '@/components/auth/Input.vue';
+import SelectText from '@/components/auth/SelectText.vue';
+import Hidden from '@/components/auth/Hidden.vue';
 import Textarea from '@/components/auth/Textarea.vue';
 import Button from '@/components/auth/Button.vue';
 import YesNo from '@/components/auth/YesNo.vue';
+import ErrorMessage from '@/components/auth/ErrorMessage.vue';
 import Subtitle from '@/components/auth/Subtitle.vue';
 import Group from '@/components/panel/admin/admins/Group.vue';
 import Layout from '@/components/panel/admin/admins/Layout.vue';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useItemStore } from '@/stores/admin/admins.js';
 
 const store = useItemStore();
 const route = useRoute();
 const id = route.params.id;
+const role = ref(null);
+const role_options = ['writer', 'worker', 'admin'];
 
 onMounted(async () => {
 	store.clearError();
 	await store.loadItem(id);
-	console.log('Update', id, store.item);
+	// console.log('Update', id, store.item);
 });
 
 function onSubmit(e) {
 	store.updateItem(id, new FormData(e.target));
+	store.scrollTop();
+}
+
+function onSubmitRole(e) {
+	store.createRole(e);
+	store.scrollTo('.error_role');
+}
+
+function onSubmitRemoveRole(e) {
+	store.removeRole(e);
+	store.scrollTo('.error_role');
 }
 </script>
 
@@ -66,6 +82,28 @@ function onSubmit(e) {
 				<Input name="address_line1" v-model="store.item.address_line1" disabled="true" />
 				<Label text="Address line 2" />
 				<Input name="address_line2" v-model="store.item.address_line2" disabled="true" />
+
+				<Button text="Update" class="settings_button" />
+			</form>
+		</Group>
+
+		<Group title="Roles" desc="Add or remove admin role.">
+			<ErrorMessage class="error_role" :message="store.getMessage" :error="store.getError" />
+
+			<Subtitle text="Add role" />
+			<form action="post" @submit.prevent="onSubmitRole">
+				<Label text="Role" />
+				<SelectText name="role" v-model="role" :options="role_options" />
+				<Hidden name="userid" v-model="store.item.id" />
+
+				<Button text="Update" class="settings_button" />
+			</form>
+
+			<Subtitle text="Remove role" />
+			<form action="post" @submit.prevent="onSubmitRemoveRole">
+				<Label text="Role" />
+				<SelectText name="role" v-model="role" :options="role_options" />
+				<Hidden name="userid" v-model="store.item.id" />
 
 				<Button text="Update" class="settings_button" />
 			</form>

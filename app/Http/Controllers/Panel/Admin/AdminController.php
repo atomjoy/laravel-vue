@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -162,6 +163,92 @@ class AdminController extends Controller
 		} catch (\Throwable $e) {
 			report($e);
 			throw new JsonException(__('remove.image.error'), 422);
+		}
+	}
+
+	/**
+	 * Add user role
+	 *
+	 * @param Admin $admin
+	 * @return Response
+	 */
+	public function addRole(Admin $admin)
+	{
+		Gate::authorize('update', $admin);
+
+		try {
+			$user = Admin::find(request()->input('userid'));
+
+			if ($user && request()->input('role') != 'super_admin') {
+				$role = Role::findByName(request()->input('role'), 'admin');
+
+				if ($role) {
+					if (!$user->hasRole($role)) {
+						$user->assignRole($role);
+					}
+
+					return response()->json([
+						'message' => 'Created. Refresh page.',
+					], 200);
+				}
+
+				return response()->json([
+					'message' => 'Invalid role.',
+				], 200);
+			}
+
+			return response()->json([
+				'message' => 'Invalid user.',
+			], 200);
+		} catch (\Throwable $e) {
+			report($e);
+
+			return response()->json([
+				'message' => 'Failed',
+			], 422);
+		}
+	}
+
+	/**
+	 * Remove user role
+	 *
+	 * @param Admin $admin
+	 * @return Response
+	 */
+	public function removeRole(Admin $admin)
+	{
+		Gate::authorize('update', $admin);
+
+		try {
+			$user = Admin::find(request()->input('userid'));
+
+			if ($user && request()->input('role') != 'super_admin') {
+				$role = Role::findByName(request()->input('role'), 'admin');
+
+				if ($role) {
+					if ($user->hasRole($role)) {
+						$user->removeRole($role);
+					}
+
+					return response()->json([
+						'message' => 'Deleted. Refresh page.',
+					], 200);
+				}
+
+				return response()->json([
+					'message' => 'Invalid role.',
+				], 200);
+			}
+
+			return response()->json([
+				'message' => 'Invalid user.',
+			], 200);
+		} catch (\Throwable $e) {
+			report($e);
+
+			return response()->json([
+				'message' => 'Failed',
+			], 422);
 		}
 	}
 }
