@@ -30,7 +30,7 @@ class UserPolicy
 	public function create(Admin $admin): bool
 	{
 		// Admins
-		if ($admin->hasRole(['super_admin'])) {
+		if ($admin->hasRole(['super_admin', 'admin'])) {
 			return true;
 		}
 
@@ -43,7 +43,7 @@ class UserPolicy
 	public function update(Admin $admin, User $user): bool
 	{
 		// Admins
-		if ($admin->hasRole(['super_admin'])) {
+		if ($admin->hasRole(['super_admin', 'admin'])) {
 			return true;
 		}
 
@@ -56,7 +56,7 @@ class UserPolicy
 	public function delete(Admin $admin, User $user): bool
 	{
 		// Admins
-		if ($admin->hasRole(['super_admin'])) {
+		if ($admin->hasRole(['super_admin', 'admin'])) {
 			return true;
 		}
 

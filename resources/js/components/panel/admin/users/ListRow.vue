@@ -26,7 +26,7 @@ const props = defineProps({
 		<div>
 			<a :href="'mailto:' + item.email" class="panel_list_item_link" target="_blank">{{ item.email }}</a>
 		</div>
-		<div>
+		<div v-if="item.mobile_prefix">
 			<a :href="'tel:+' + item.mobile_prefix + item.mobile" class="panel_list_item_link" target="_blank">+{{ item.mobile_prefix + ' ' + item.mobile }}</a>
 		</div>
 	</td>

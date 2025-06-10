@@ -54,23 +54,22 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 		// Subscribe
 		Route::resource('subscribers', AdminSubscriberController::class)->except(['create', 'edit']);
 		Route::get('subscribers/export/csv', [AdminSubscriberController::class, 'csv']);
+		// Users
+		Route::resource('users', UserController::class)->except(['create', 'edit']);
+		Route::get('users/remove/{user}', [UserController::class, 'remove']);
 	});
 
 	// Roles: superadmin
 	Route::middleware([
 		'role:super_admin,admin',
 	])->group(function () {
-		// Users
-		Route::resource('users', UserController::class)->except(['create', 'edit']);
-		Route::get('users/remove/{user}', [UserController::class, 'remove']);
-
 		// Admins
 		Route::resource('admins', AdminController::class)->except(['create', 'edit']);
 		Route::get('admins/remove/{admin}', [AdminController::class, 'remove']);
 		Route::post('admins/role', [AdminController::class, 'addRole']);
 		Route::post('admins/role/remove', [AdminController::class, 'removeRole']);
-		// TODO: Add admin permissions from panel
-		// Route::post('admins/permission', [AdminController::class, 'addPermission']);
+		Route::post('admins/permission', [AdminController::class, 'addPermission']);
+		Route::post('admins/permission/remove', [AdminController::class, 'removePermission']);
 
 		// Roles
 		Route::get('roles', function () {

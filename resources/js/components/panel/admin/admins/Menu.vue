@@ -10,9 +10,9 @@ const props = defineProps({
 		{{ $t('List') }}
 	</RouterLink>
 
-	<!-- <RouterLink to="/admin/admins/create" class="panel_settings_link">
+	<RouterLink to="/admin/admins/create" class="panel_settings_link">
 		{{ $t('Create') }}
-	</RouterLink> -->
+	</RouterLink>
 
 	<RouterLink to="/admin/admins/edit" class="panel_settings_link" :class="{ 'router-link-active': props.edit }">
 		{{ $t('Edit') }}

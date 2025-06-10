@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Panel\Admin;
 
+use App\Enums\Spatie\Permissions\Model\ArticleEnum;
+use App\Enums\Spatie\RolesEnum;
+use App\Events\PermissionChange;
+use App\Events\PermissionDelete;
 use App\Events\RoleChange;
 use App\Events\RoleDelete;
 use App\Models\Admin;
@@ -17,6 +21,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class AdminController extends Controller
 {
@@ -47,12 +52,28 @@ class AdminController extends Controller
 	{
 		Gate::authorize('create', Admin::class);
 
-		// $valid = $request->validated();
+		try {
+			$valid = $request->validated();
+			$valid['password'] = md5(time());
+			$admin = Admin::create($valid);
 
-		return response()->json([
-			'message' => 'Disabled',
-			'data' => null,
-		]);
+			$admin->assignRole(RolesEnum::WRITER->value);
+
+			$admin->givePermissionTo(ArticleEnum::ARTICLE_VIEW->value);
+			$admin->givePermissionTo(ArticleEnum::ARTICLE_CREATE->value);
+			$admin->givePermissionTo(ArticleEnum::ARTICLE_UPDATE->value);
+			$admin->givePermissionTo(ArticleEnum::ARTICLE_DELETE->value);
+
+			$this->upload($admin);
+
+			return response()->json([
+				'message' => 'Created',
+				'data' => $admin,
+			]);
+		} catch (\Throwable $e) {
+			report($e);
+			throw new JsonException(__('Failed'), 422);
+		}
 	}
 
 	/**
@@ -241,6 +262,118 @@ class AdminController extends Controller
 
 				return response()->json([
 					'message' => 'Invalid role.',
+				], 200);
+			}
+
+			return response()->json([
+				'message' => 'Invalid user.',
+			], 200);
+		} catch (\Throwable $e) {
+			report($e);
+
+			return response()->json([
+				'message' => 'Failed',
+			], 422);
+		}
+	}
+
+	/**
+	 * Add user role
+	 *
+	 * @param Admin $admin
+	 * @return Response
+	 */
+	public function addPermission(Admin $admin)
+	{
+		Gate::authorize('update', $admin);
+
+		try {
+			$user = Admin::find(request()->input('userid'));
+
+			if ($user) {
+				// Allowed only
+				if (!in_array(request()->input('role'), [
+					'role_view',
+					'role_create',
+					'role_update',
+					'role_delete',
+					'user_view',
+					'user_create',
+					'user_update',
+					'user_delete',
+				])) {
+					$permission = Permission::findByName(request()->input('role'), 'admin');
+
+					if ($permission) {
+						if (!$user->hasPermissionTo($permission)) {
+							$user->givePermissionTo($permission);
+							PermissionChange::dispatch($user, $permission);
+						}
+
+						return response()->json([
+							'message' => 'Created. Refresh page.',
+						], 200);
+					}
+				}
+
+				return response()->json([
+					'message' => 'Invalid permission.',
+				], 200);
+			}
+
+			return response()->json([
+				'message' => 'Invalid user.',
+			], 200);
+		} catch (\Throwable $e) {
+			report($e);
+
+			return response()->json([
+				'message' => 'Failed',
+			], 422);
+		}
+	}
+
+	/**
+	 * Remove user role
+	 *
+	 * @param Admin $admin
+	 * @return Response
+	 */
+	public function removePermission(Admin $admin)
+	{
+		Gate::authorize('update', $admin);
+
+		try {
+			$user = Admin::find(request()->input('userid'));
+
+			if ($user) {
+				// Allowed only
+				if (!in_array(request()->input('role'), [
+					'role_view',
+					'role_create',
+					'role_update',
+					'role_delete',
+					'user_view',
+					'user_create',
+					'user_update',
+					'user_delete',
+				])) {
+					$permission = Permission::findByName(request()->input('role'), 'admin');
+
+					if ($permission) {
+						if ($user->hasPermissionTo($permission)) {
+							$user->revokePermissionTo($permission);
+							PermissionDelete::dispatch($user, $permission);
+						}
+
+						return response()->json([
+							'message' => 'Deleted. Refresh page.',
+						], 200);
+					}
+				}
+
+				return response()->json([
+					'message' => 'Invalid permission.',
 				], 200);
 			}
 

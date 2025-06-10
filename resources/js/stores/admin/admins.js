@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue';
 import { defineStore, storeToRefs } from 'pinia';
+import { useRoute } from 'vue-router';
 import router from '@/router';
 import axios from 'axios';
 
@@ -13,6 +14,7 @@ export const useItemStore = defineStore('admins', () => {
 	let last_page = ref(1);
 	let perpage = ref(5);
 	let list = ref([]);
+	const route = useRoute();
 
 	// Getters
 	const getItem = computed(() => item);
@@ -23,11 +25,12 @@ export const useItemStore = defineStore('admins', () => {
 
 	// Actions
 	async function loadList() {
+		perpage.value = route.query.perpage ?? 5;
 		let res = await axios.get('/web/api/admin/admins?page=' + current_page.value + '&perpage=' + perpage.value);
 		list.value = res?.data?.data ?? [];
 		last_page.value = res?.data?.paginate.total_pages ?? 1;
 		current_page.value = res?.data?.paginate.current_page ?? 1;
-		router.push({ query: { page: current_page.value } });
+		router.push({ query: { page: current_page.value, perpage: perpage.value } });
 	}
 
 	async function deleteItem(id) {
@@ -98,7 +101,6 @@ export const useItemStore = defineStore('admins', () => {
 	async function removeRole(e) {
 		try {
 			let res = await axios.post('/web/api/admin/admins/role/remove', new FormData(e.target));
-			console.log(res.data);
 			setMessage(res);
 		} catch (err) {
 			setError(err);
@@ -108,6 +110,15 @@ export const useItemStore = defineStore('admins', () => {
 	async function createPermission(e) {
 		try {
 			let res = await axios.post('/web/api/admin/admins/permission', new FormData(e.target));
+			setMessage(res);
+		} catch (err) {
+			setError(err);
+		}
+	}
+
+	async function removePermission(e) {
+		try {
+			let res = await axios.post('/web/api/admin/admins/permission/remove', new FormData(e.target));
 			setMessage(res);
 		} catch (err) {
 			setError(err);
@@ -213,8 +224,9 @@ export const useItemStore = defineStore('admins', () => {
 		setPerpage,
 		prevPage,
 		nextPage,
-		createPermission,
 		createRole,
 		removeRole,
+		createPermission,
+		removePermission,
 	};
 });

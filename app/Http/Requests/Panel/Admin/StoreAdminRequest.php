@@ -30,20 +30,32 @@ class StoreAdminRequest extends FormRequest
 	 */
 	public function rules(): array
 	{
+		$email = 'email:rfc,dns';
+		if (env('APP_DEBUG') == true) {
+			$email = 'email';
+		}
+
 		return [
-			'file' => [
+			'name' => 'required|min:1|max:50',
+			'email' => [
 				'required',
+				$email,
+				'max:161',
+				Rule::unique('users')
+				// Rule::unique('users')->whereNull('deleted_at')
+			],
+			'f2a' => 'required|numeric',
+			'file' => [
+				'sometimes',
 				Rule::file()->types(['webp', 'jpeg', 'jpg', 'png', 'gif'])
 					->max(config('default.max_upload_size_mb', 5) * 1024),
 				Rule::dimensions()
 					->minWidth(config('default.avatar_min_pixels', 10))
 					->minHeight(config('default.avatar_min_pixels', 10)),
 				Rule::dimensions()
-					->maxWidth(config('default.avatar_max_pixels', 8000))
-					->maxHeight(config('default.avatar_max_pixels', 8000)),
+					->maxWidth(config('default.avatar_max_pixels', 5000))
+					->maxHeight(config('default.avatar_max_pixels', 5000)),
 			],
-			'name' => 'sometimes|min:1|max:50',
-			'f2a' => 'required|numeric',
 		];
 	}
 

@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue';
 import { defineStore, storeToRefs } from 'pinia';
+import { useRoute } from 'vue-router';
 import router from '@/router';
 import axios from 'axios';
 
@@ -13,6 +14,7 @@ export const useItemStore = defineStore('users', () => {
 	let last_page = ref(1);
 	let perpage = ref(5);
 	let list = ref([]);
+	const route = useRoute();
 
 	// Getters
 	const getItem = computed(() => item);
@@ -23,11 +25,12 @@ export const useItemStore = defineStore('users', () => {
 
 	// Actions
 	async function loadList() {
+		perpage.value = route.query.perpage ?? 5;
 		let res = await axios.get('/web/api/admin/users?page=' + current_page.value + '&perpage=' + perpage.value);
 		list.value = res?.data?.data ?? [];
 		last_page.value = res?.data?.paginate.total_pages ?? 1;
 		current_page.value = res?.data?.paginate.current_page ?? 1;
-		router.push({ query: { page: current_page.value } });
+		router.push({ query: { page: current_page.value, perpage: perpage.value } });
 	}
 
 	async function deleteItem(id) {

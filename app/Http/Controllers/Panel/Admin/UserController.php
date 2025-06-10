@@ -111,6 +111,32 @@ class UserController extends Controller
 	}
 
 	/**
+	 * Remove user image
+	 *
+	 * @param User $user
+	 * @return void
+	 */
+	function remove(User $user)
+	{
+		Gate::authorize('update', $user);
+
+		try {
+			if (Storage::exists($user->avatar)) {
+				Storage::delete($user->avatar);
+				$user->avatar = null;
+				$user->save();
+			}
+
+			return response()->json([
+				'message' => __('remove.image.success'),
+			], 200);
+		} catch (\Throwable $e) {
+			report($e);
+			throw new JsonException(__('remove.image.error'), 422);
+		}
+	}
+
+	/**
 	 * Upload user image
 	 *
 	 * @param User $user
@@ -136,32 +162,6 @@ class UserController extends Controller
 			}
 		} catch (\Throwable $e) {
 			report($e->getMessage());
-		}
-	}
-
-	/**
-	 * Remove user image
-	 *
-	 * @param User $user
-	 * @return void
-	 */
-	function remove(User $user)
-	{
-		Gate::authorize('update', $user);
-
-		try {
-			if (Storage::exists($user->avatar)) {
-				Storage::delete($user->avatar);
-				$user->avatar = null;
-				$user->save();
-			}
-
-			return response()->json([
-				'message' => __('remove.image.success'),
-			], 200);
-		} catch (\Throwable $e) {
-			report($e);
-			throw new JsonException(__('remove.image.error'), 422);
 		}
 	}
 }

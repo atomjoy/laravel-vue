@@ -306,6 +306,7 @@ const pl = {
 	Edit: 'Edytuj',
 	hidden: 'Niewidoczna',
 	visible: 'Widoczna',
+	Permission: 'Uprawnienie',
 	'Min number of characters': 'Minimalna liczba znaków',
 	'Contains a capital letter': 'Zawiera dużą literę',
 	'Contains a small letter': 'Zawiera małą literę',
@@ -488,6 +489,9 @@ const pl = {
 	'Add role': 'Dodaj rolę',
 	'Remove role': 'Usuń rolę',
 	'Add or remove admin role.': 'Dodaj lub usuń role',
+	'Add or remove admin permissions.': 'Dodaj lub usuń uprawnienie',
+	'Add permission': 'Dodaj uprawnienie',
+	'Remove permission': 'Usuń uprawnienie',
 };
 
 export default pl;

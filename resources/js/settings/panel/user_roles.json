@@ -5,6 +5,7 @@
 	"permissions": [
 		"disable_login",
 		"disable_email",
+		"disable_2fa",
 		"disable_avatar",
 		"disable_username"
 	]

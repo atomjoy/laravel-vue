@@ -32,14 +32,14 @@ const auth = useAuthStore();
 		<NavbarLink to="/admin/subscribers" text="Subscribers">
 			<IconSubscriber />
 		</NavbarLink>
+
+		<NavbarLink to="/admin/users" text="Users">
+			<IconUser />
+		</NavbarLink>
 	</div>
 
 	<!-- SuperAdmin links -->
 	<div v-if="auth.hasRole('super_admin', 'admin')">
-		<NavbarLink to="/admin/users" text="Users">
-			<IconUser />
-		</NavbarLink>
-
 		<NavbarLink to="/admin/admins" text="Admins">
 			<IconRoles />
 		</NavbarLink>

@@ -21,8 +21,10 @@ const route = useRoute();
 const id = route.params.id;
 const add_role = ref(null);
 const remove_role = ref(null);
+const add_permission = ref(null);
+const remove_permission = ref(null);
 const allowed_roles = admin_roles.roles;
-// const allowed_permissions = admin_roles.permissions;
+const allowed_permissions = admin_roles.permissions;
 
 onMounted(async () => {
 	store.clearError();
@@ -43,6 +45,16 @@ function onSubmitRole(e) {
 function onSubmitRemoveRole(e) {
 	store.removeRole(e);
 	store.scrollTo('.error_role');
+}
+
+function onSubmitPermission(e) {
+	store.createPermission(e);
+	store.scrollTo('.error_permission');
+}
+
+function onSubmitRemovePermission(e) {
+	store.removePermission(e);
+	store.scrollTo('.error_permission');
 }
 </script>
 
@@ -107,6 +119,28 @@ function onSubmitRemoveRole(e) {
 			<form action="post" @submit.prevent="onSubmitRemoveRole">
 				<Label text="Role" />
 				<SelectText name="role" v-model="remove_role" :options="allowed_roles" />
+				<Hidden name="userid" v-model="store.item.id" />
+
+				<Button text="Update" class="settings_button" />
+			</form>
+		</Group>
+
+		<Group title="Permissions" desc="Add or remove admin permissions.">
+			<ErrorMessage class="error_permission" :message="store.getMessage" :error="store.getError" />
+
+			<Subtitle text="Add permission" />
+			<form action="post" @submit.prevent="onSubmitPermission">
+				<Label text="Permission" />
+				<SelectText name="role" v-model="add_permission" :options="allowed_permissions" />
+				<Hidden name="userid" v-model="store.item.id" />
+
+				<Button text="Update" class="settings_button" />
+			</form>
+
+			<Subtitle text="Remove permission" />
+			<form action="post" @submit.prevent="onSubmitRemovePermission">
+				<Label text="Permission" />
+				<SelectText name="role" v-model="remove_permission" :options="allowed_permissions" />
 				<Hidden name="userid" v-model="store.item.id" />
 
 				<Button text="Update" class="settings_button" />
