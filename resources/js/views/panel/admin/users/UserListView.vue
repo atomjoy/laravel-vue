@@ -3,6 +3,7 @@ import Layout from '@/components/panel/admin/users/Layout.vue';
 import ListRow from '@/components/panel/admin/users/ListRow.vue';
 import Group from '@/components/panel/admin/users/GroupList.vue';
 import Paginate from '@/components/panel/admin/Paginate.vue';
+import PaginateSubpages from '@/components/panel/admin/PaginateSubpages.vue';
 import TableNoRecords from '@/components/utils/alerts/TableNoRecords.vue';
 import { useRoute } from 'vue-router';
 import { onMounted, watch } from 'vue';
@@ -49,6 +50,7 @@ watch(
 			</table>
 
 			<Paginate :store="store" />
+			<!-- <PaginateSubpages @current_page="console.log($event)" /> -->
 		</Group>
 	</Layout>
 </template>
