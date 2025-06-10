@@ -9,8 +9,9 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Admin;
 
-class LoginUserError
+class LoginAdmin
 {
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,7 +20,7 @@ class LoginUserError
 	 *
 	 * @return void
 	 */
-	public function __construct(public $email = '') {}
+	public function __construct(public Admin $user) {}
 
 	/**
 	 * Get the channels the event should broadcast on.

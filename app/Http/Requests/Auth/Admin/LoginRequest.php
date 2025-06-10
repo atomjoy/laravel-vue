@@ -4,7 +4,8 @@ namespace App\Http\Requests\Auth\Admin;
 
 use App\Mail\Auth\Admin\F2aMail;
 use App\Models\Auth\Admin\AdminF2acode;
-use App\Events\LoginUserError;
+use App\Events\LoginAdmin;
+use App\Events\LoginAdminError;
 use App\Exceptions\JsonException;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Validation\Validator;
@@ -68,9 +69,11 @@ class LoginRequest extends FormRequest
 				config('default.ratelimit_login_time', 300)
 			);
 
-			LoginUserError::dispatch($this->only('email'));
+			LoginAdminError::dispatch($this->only('email'));
 
 			throw new JsonException(__('login.failed'), 422);
+		} else {
+			LoginAdmin::dispatch(Auth::guard('admin')->user());
 		}
 
 		if (empty(Auth::guard('admin')->user()->email_verified_at)) {

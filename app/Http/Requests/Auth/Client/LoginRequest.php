@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth\Client;
 
+use App\Events\LoginUser;
 use App\Events\LoginUserError;
 use App\Exceptions\JsonException;
 use App\Mail\Auth\Client\F2aMail;
@@ -70,6 +71,8 @@ class LoginRequest extends FormRequest
 			LoginUserError::dispatch($this->only('email'));
 
 			throw new JsonException(__('login.failed'), 422);
+		} else {
+			LoginUser::dispatch(Auth::guard('web')->user());
 		}
 
 		if (empty(Auth::user()->email_verified_at)) {

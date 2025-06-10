@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Panel\Admin;
 
+use App\Events\RoleChange;
+use App\Events\RoleDelete;
 use App\Models\Admin;
 use App\Exceptions\JsonException;
 use App\Http\Requests\Panel\Admin\StoreAdminRequest;
@@ -185,6 +187,7 @@ class AdminController extends Controller
 				if ($role) {
 					if (!$user->hasRole($role)) {
 						$user->assignRole($role);
+						RoleChange::dispatch($user, $role);
 					}
 
 					return response()->json([
@@ -228,6 +231,7 @@ class AdminController extends Controller
 				if ($role) {
 					if ($user->hasRole($role)) {
 						$user->removeRole($role);
+						RoleDelete::dispatch($user, $role);
 					}
 
 					return response()->json([

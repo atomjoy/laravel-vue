@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth\Client;
 
 use App\Enums\Spatie\Permissions\Model\DisableEnum;
-use App\Events\LoginUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Client\LoginRequest;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +21,6 @@ class LoginController extends Controller
 		$request->session()->regenerate();
 
 		if (Auth::check()) {
-			LoginUser::dispatch(Auth::user());
-
 			if (Auth::guard('web')->user()->hasRole(DisableEnum::DISABLE_LOGIN)) {
 				Auth::logout();
 				return response()->json([

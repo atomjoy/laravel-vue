@@ -19,7 +19,7 @@ class LoggedUserError
 	 *
 	 * @return void
 	 */
-	public function __construct(public $valid = '') {}
+	public function __construct(public $email = '') {}
 
 	/**
 	 * Get the channels the event should broadcast on.
