@@ -27,7 +27,6 @@ watch(
 	() => route.query.page,
 	async (newId, oldId) => {
 		store.current_page = route.query.page ?? 1;
-		store.loadList();
 		await store.loadList();
 		current_page.value = store.current_page;
 		last_page.value = store.last_page;
@@ -61,8 +60,8 @@ async function setPage(page) {
 					<TableNoRecords :show="store.list.length == 0" />
 				</tbody>
 			</table>
+
 			<!-- <Paginate :store="store" /> -->
-			<!-- <PaginateCustom :current_page="10" :last_page="10" @page="setPage" /> -->
 			<PaginateCustom :current_page="current_page" :last_page="last_page" @page="setPage" />
 		</Group>
 	</Layout>

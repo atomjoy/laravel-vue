@@ -3,27 +3,40 @@ import Layout from '@/components/panel/admin/admins/Layout.vue';
 import ListRow from '@/components/panel/admin/admins/ListRow.vue';
 import Group from '@/components/panel/admin/admins/GroupList.vue';
 import Paginate from '@/components/panel/admin/Paginate.vue';
+import PaginateCustom from '@/components/panel/admin/PaginateCustom.vue';
 import TableNoRecords from '@/components/utils/alerts/TableNoRecords.vue';
 import { useRoute } from 'vue-router';
-import { onMounted, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useItemStore } from '@/stores/admin/admins.js';
 
 const store = useItemStore();
 const route = useRoute();
 
-onMounted(() => {
+const current_page = ref(1);
+const last_page = ref(1);
+
+onMounted(async () => {
 	store.clearError();
 	store.current_page = route.query.page ?? 1;
-	store.loadList();
+	await store.loadList();
+	current_page.value = store.current_page;
+	last_page.value = store.last_page;
 });
 
 watch(
 	() => route.query.page,
-	(newId, oldId) => {
+	async (newId, oldId) => {
 		store.current_page = route.query.page ?? 1;
-		store.loadList();
+		await store.loadList();
+		current_page.value = store.current_page;
+		last_page.value = store.last_page;
 	}
 );
+
+async function setPage(page) {
+	store.current_page = page;
+	await store.loadList();
+}
 </script>
 
 <template>
@@ -48,7 +61,8 @@ watch(
 				</tbody>
 			</table>
 
-			<Paginate :store="store" />
+			<!-- <Paginate :store="store" /> -->
+			<PaginateCustom :current_page="current_page" :last_page="last_page" @page="setPage" />
 		</Group>
 	</Layout>
 </template>
