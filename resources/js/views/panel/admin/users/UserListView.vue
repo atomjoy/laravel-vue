@@ -51,6 +51,7 @@ async function searchText() {
 	<Layout :message="store.getMessage" :error="store.getError">
 		<Group title="Users" desc="Customers list.">
 			<input class="panel_search_input" type="text" v-model="search" @keyup="searchText" placeholder="Search" />
+
 			<table class="panel_table_list">
 				<tbody>
 					<tr class="panel_list_header">

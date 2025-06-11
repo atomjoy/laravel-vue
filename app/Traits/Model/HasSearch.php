@@ -19,16 +19,19 @@ trait HasSearch
 {
 	public function scopeSearchName($query, $name)
 	{
-		$query->orWhere('name', 'like', "%{$name}%");
+		$query->orWhere('name', 'LIKE', "%{$name}%"); // case insensitive
 	}
 
 	public function scopeSearchEmail($query, $email)
 	{
-		$query->orWhere('email', 'like', "%{$email}%");
+		$query->orWhere('email', 'LIKE', "%{$email}%");
 	}
 
 	public function scopeSearchMobile($query, $mobile)
 	{
-		$query->orWhere('mobile', 'like', "%{$mobile}%");
+		$query->orWhere('mobile', 'LIKE', "%{$mobile}%");
 	}
 }
+
+
+// Model::whereRaw("UPPER('{$column}') LIKE '%'". strtoupper($value)."'%'");
