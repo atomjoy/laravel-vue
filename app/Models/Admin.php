@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Traits\Model\HasSearch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -10,12 +12,14 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class Admin extends Authenticatable
 {
 	/** @use HasFactory<\Database\Factories\AdminFactory> */
 	use HasFactory, Notifiable;
 	use HasRoles;
+	use HasSearch;
 
 	/**
 	 * Default table name

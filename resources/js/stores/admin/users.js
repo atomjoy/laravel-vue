@@ -27,9 +27,9 @@ export const useItemStore = defineStore('users', () => {
 	const getLastPage = computed(() => last_page.value);
 
 	// Actions
-	async function loadList() {
+	async function loadList(search = '') {
 		perpage.value = route.query.perpage ?? 5;
-		let res = await axios.get('/web/api/admin/users?page=' + current_page.value + '&perpage=' + perpage.value);
+		let res = await axios.get('/web/api/admin/users?page=' + current_page.value + '&perpage=' + perpage.value + '&search=' + search);
 		list.value = res?.data?.data ?? [];
 		last_page.value = res?.data?.paginate.total_pages ?? 1;
 		current_page.value = res?.data?.paginate.current_page ?? 1;

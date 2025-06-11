@@ -14,11 +14,12 @@ const route = useRoute();
 
 const current_page = ref(1);
 const last_page = ref(1);
+const search = ref('');
 
 onMounted(async () => {
 	store.clearError();
 	store.current_page = route.query.page ?? 1;
-	await store.loadList();
+	await store.loadList(search.value);
 	current_page.value = store.current_page;
 	last_page.value = store.last_page;
 });
@@ -27,7 +28,7 @@ watch(
 	() => route.query.page,
 	async (newId, oldId) => {
 		store.current_page = route.query.page ?? 1;
-		await store.loadList();
+		await store.loadList(search.value);
 		current_page.value = store.current_page;
 		last_page.value = store.last_page;
 	}
@@ -37,11 +38,19 @@ async function setPage(page) {
 	store.current_page = page;
 	await store.loadList();
 }
+
+async function searchText() {
+	store.current_page = route.query.page ?? 1;
+	await store.loadList(search.value);
+	current_page.value = store.current_page;
+	last_page.value = store.last_page;
+}
 </script>
 
 <template>
 	<Layout :message="store.getMessage" :error="store.getError">
 		<Group title="Users" desc="Customers list.">
+			<input class="panel_search_input" type="text" v-model="search" @keyup="searchText" placeholder="Search" />
 			<table class="panel_table_list">
 				<tbody>
 					<tr class="panel_list_header">

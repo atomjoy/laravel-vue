@@ -839,6 +839,15 @@
 	text-align: center;
 }
 
+.panel_search_input {
+	float: right;
+	width: 40%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid var(--input-border);
+	border-radius: var(--border-radius);
+}
+
 @media all and (max-width: 1024px) {
 	.navbar__open {
 		display: inherit;
