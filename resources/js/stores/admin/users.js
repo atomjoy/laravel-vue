@@ -22,6 +22,9 @@ export const useItemStore = defineStore('users', () => {
 	// With value
 	const getError = computed(() => error.value);
 	const getMessage = computed(() => message.value);
+	// With value
+	const getCurrentPage = computed(() => current_page.value);
+	const getLastPage = computed(() => last_page.value);
 
 	// Actions
 	async function loadList() {
@@ -180,5 +183,7 @@ export const useItemStore = defineStore('users', () => {
 		setPerpage,
 		prevPage,
 		nextPage,
+		getCurrentPage,
+		getLastPage,
 	};
 });
