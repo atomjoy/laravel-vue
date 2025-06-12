@@ -1,7 +1,10 @@
 {
 	"roles": [
 		"editor",
-		"manager"
+		"manager",
+		"lite",
+		"pro",
+		"vip"
 	],
 	"permissions": [
 		"disable_login",

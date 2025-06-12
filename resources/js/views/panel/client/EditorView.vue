@@ -14,3 +14,9 @@ const auth = useAuthStore();
 		</div>
 	</PanelLayout>
 </template>
+
+<style>
+.panel_editor {
+	padding-inline: 30px;
+}
+</style>
