@@ -12,16 +12,12 @@ import { useItemStore } from '@/stores/admin/users.js';
 const store = useItemStore();
 const route = useRoute();
 
-const current_page = ref(1);
-const last_page = ref(1);
 const search = ref('');
 
 onMounted(async () => {
 	store.clearError();
 	store.current_page = route.query.page ?? 1;
 	await store.loadList(search.value);
-	current_page.value = store.current_page;
-	last_page.value = store.last_page;
 });
 
 watch(
@@ -29,8 +25,6 @@ watch(
 	async (newId, oldId) => {
 		store.current_page = route.query.page ?? 1;
 		await store.loadList(search.value);
-		current_page.value = store.current_page;
-		last_page.value = store.last_page;
 	}
 );
 
@@ -42,8 +36,6 @@ async function setPage(page) {
 async function searchText() {
 	store.current_page = route.query.page ?? 1;
 	await store.loadList(search.value);
-	current_page.value = store.current_page;
-	last_page.value = store.last_page;
 }
 </script>
 
@@ -72,7 +64,7 @@ async function searchText() {
 			</table>
 
 			<!-- <Paginate :store="store" /> -->
-			<PaginateCustom :current_page="current_page" :last_page="last_page" @page="setPage" />
+			<PaginateCustom :current_page="store.current_page" :last_page="store.last_page" @page="setPage" />
 		</Group>
 	</Layout>
 </template>
