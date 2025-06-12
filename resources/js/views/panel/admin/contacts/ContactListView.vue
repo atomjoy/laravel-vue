@@ -63,7 +63,7 @@ async function searchText() {
 			</table>
 
 			<!-- <Paginate :store="store" /> -->
-			<PaginateCustom :current_page="Number(store.current_page)" :last_page="Number(store.last_page)" @page="setPage" />
+			<PaginateCustom v-if="store.list.length != 0" :current_page="Number(store.current_page)" :last_page="Number(store.last_page)" @page="setPage" />
 		</Group>
 	</Layout>
 </template>
