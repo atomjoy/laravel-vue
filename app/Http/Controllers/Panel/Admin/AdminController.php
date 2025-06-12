@@ -34,7 +34,23 @@ class AdminController extends Controller
 
 		$perpage = request()->integer('perpage', default: 5);
 
-		return new AdminCollection(Admin::latest('id')->paginate($perpage));
+		$q = Admin::query()->latest('id');
+
+		if (request()->filled('search')) {
+			$q->searchName(request()->input('search'));
+		}
+
+		if (request()->filled('search')) {
+			$q->searchEmail(request()->input('search'));
+		}
+
+		if (request()->filled('search')) {
+			$q->searchMobile(request()->input('search'));
+		}
+
+		return new AdminCollection($q->paginate($perpage));
+
+		// return new AdminCollection(Admin::latest('id')->paginate($perpage));
 	}
 
 	/**

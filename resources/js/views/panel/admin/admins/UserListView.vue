@@ -12,15 +12,12 @@ import { useItemStore } from '@/stores/admin/admins.js';
 const store = useItemStore();
 const route = useRoute();
 
-const current_page = ref(1);
-const last_page = ref(1);
+const search = ref('');
 
 onMounted(async () => {
 	store.clearError();
 	store.current_page = route.query.page ?? 1;
 	await store.loadList();
-	current_page.value = store.current_page;
-	last_page.value = store.last_page;
 });
 
 watch(
@@ -28,8 +25,6 @@ watch(
 	async (newId, oldId) => {
 		store.current_page = route.query.page ?? 1;
 		await store.loadList();
-		current_page.value = store.current_page;
-		last_page.value = store.last_page;
 	}
 );
 
@@ -37,11 +32,18 @@ async function setPage(page) {
 	store.current_page = page;
 	await store.loadList();
 }
+
+async function searchText() {
+	store.current_page = route.query.page ?? 1;
+	await store.loadList(search.value);
+}
 </script>
 
 <template>
 	<Layout :message="store.getMessage" :error="store.getError">
 		<Group title="Admins" desc="Administrators list.">
+			<input class="panel_search_input" type="text" v-model="search" @keyup="searchText" placeholder="Search" />
+
 			<table class="panel_table_list">
 				<tbody>
 					<tr class="panel_list_header">
@@ -62,7 +64,7 @@ async function setPage(page) {
 			</table>
 
 			<!-- <Paginate :store="store" /> -->
-			<PaginateCustom :current_page="current_page" :last_page="last_page" @page="setPage" />
+			<PaginateCustom :current_page="Number(store.current_page)" :last_page="Number(store.last_page)" @page="setPage" />
 		</Group>
 	</Layout>
 </template>

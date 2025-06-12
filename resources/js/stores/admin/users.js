@@ -33,7 +33,7 @@ export const useItemStore = defineStore('users', () => {
 		list.value = res?.data?.data ?? [];
 		last_page.value = res?.data?.paginate.total_pages ?? 1;
 		current_page.value = res?.data?.paginate.current_page ?? 1;
-		router.push({ query: { page: current_page.value, perpage: perpage.value } });
+		router.replace({ query: { page: current_page.value, perpage: perpage.value } });
 	}
 
 	async function deleteItem(id) {
