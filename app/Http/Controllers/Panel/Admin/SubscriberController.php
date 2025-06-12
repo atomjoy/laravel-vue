@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel\Admin;
 
 use Exception;
+use App\Models\Admin;
 use App\Models\Panel\Subscriber;
 use App\Mail\Page\SubscribeMail;
 use App\Http\Requests\Panel\Admin\StoreSubscriberRequest;
@@ -105,6 +106,17 @@ class SubscriberController extends Controller
 		$subscriber->delete();
 
 		return response()->json(['message' => 'Deleted']);
+	}
+
+	/**
+	 * Count the specified resource.
+	 */
+	public function count(Admin $admin)
+	{
+		return response()->json([
+			'message' => 'Counted',
+			'count' => Subscriber::count() ?? 0
+		]);
 	}
 
 	/**

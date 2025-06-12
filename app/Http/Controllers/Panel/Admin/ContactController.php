@@ -115,7 +115,7 @@ class ContactController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Count the specified resource.
 	 */
 	public function count(Admin $admin)
 	{

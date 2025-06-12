@@ -42,6 +42,10 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 		// Media
 		Route::resource('articlemedia', AdminArticleMediaController::class)->except(['create', 'edit']);
 		Route::get('articlemedia/remove/{articlemedia}', [AdminArticleMediaController::class, 'remove']);
+
+		// Count contacts
+		Route::get('/contacts/count', [AdminContactController::class, 'count'])->name('contacts.count');
+		Route::get('/subscribers/count', [AdminSubscriberController::class, 'count'])->name('subscribers.count');
 	});
 
 	// Roles: superadmin, admin
