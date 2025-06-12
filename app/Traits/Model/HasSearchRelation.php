@@ -2,6 +2,8 @@
 
 namespace App\Traits\Model;
 
+use Illuminate\Database\Eloquent\Builder;
+
 /**
  * Model search scopes relation
  *
@@ -26,10 +28,17 @@ trait HasSearchRelation
 			->with([$relation => $constraint]);
 	}
 
-	public function scopeSearchAddress($query, $str)
+	/**
+	 * Search with admin relation
+	 *
+	 * @param Builder $query
+	 * @param String $str
+	 * @return void
+	 */
+	public function scopeSearchAdmin($query, $str)
 	{
-		$query->whereHas('address', function ($q) use ($str) {
-			$q->where('city', 'LIKE', "%{$str}%");
+		$query->orWhereHas('admin', function ($q) use ($str) {
+			$q->where('name', 'LIKE', "%{$str}%");
 		});
 	}
 }

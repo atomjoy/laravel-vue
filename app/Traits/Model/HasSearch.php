@@ -32,6 +32,11 @@ trait HasSearch
 		$query->orWhere('mobile', 'LIKE', "%{$mobile}%");
 	}
 
+	public function scopeSearchTitle($query, $str)
+	{
+		$query->orWhere('title', 'LIKE', "%{$str}%");
+	}
+
 	public function scopeSearchSubject($query, $str)
 	{
 		$query->orWhere('subject', 'LIKE', "%{$str}%");

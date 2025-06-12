@@ -2,6 +2,9 @@
 
 namespace App\Models\Panel;
 
+use App\Models\Admin;
+use App\Traits\Model\HasSearch;
+use App\Traits\Model\HasSearchRelation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +13,7 @@ class ArticleMedia extends Model
 {
 	/** @use HasFactory<\Database\Factories\Panel\ArticleMediaFactory> */
 	use HasFactory;
+	use HasSearch, HasSearchRelation;
 
 	/**
 	 * The attributes that are mass assignable.

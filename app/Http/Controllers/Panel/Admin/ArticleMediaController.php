@@ -26,7 +26,19 @@ class ArticleMediaController extends Controller
 
 		$perpage = request()->integer('perpage', default: 5);
 
-		return new ArticleMediaCollection(ArticleMedia::latest('id')->paginate($perpage));
+		$q = ArticleMedia::query()->latest('id');
+
+		if (request()->filled('search')) {
+			$q->searchTitle(request()->input('search'));
+		}
+
+		if (request()->filled('search')) {
+			$q->searchAdmin(request()->input('search'));
+		}
+
+		return new ArticleMediaCollection($q->paginate($perpage));
+
+		// return new ArticleMediaCollection(ArticleMedia::latest('id')->paginate($perpage));
 	}
 
 	/**
