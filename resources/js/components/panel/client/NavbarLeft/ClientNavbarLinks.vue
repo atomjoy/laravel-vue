@@ -19,15 +19,15 @@ const auth = useAuthStore();
 		<IconReply />
 	</NavbarLink> -->
 
-	<!-- Editor only -->
-	<div v-if="auth.hasRole('editor', 'web')">
+	<!-- Editor and Manager -->
+	<div v-if="auth.hasRole('editor', 'web') || auth.hasRole('manager', 'web')">
 		<NavbarLink to="/panel/editor" text="Editor">
 			<IconEdit />
 		</NavbarLink>
 	</div>
 
-	<!-- Editor and Manager -->
-	<div v-if="auth.hasRole('editor', 'web') || auth.hasRole('manager', 'web')">
+	<!-- Manager only -->
+	<div v-if="auth.hasRole('manager', 'web')">
 		<!-- <NavbarLink to="/panel/manager" text="Manager">
 			<IconEdit />
 		</NavbarLink> -->
