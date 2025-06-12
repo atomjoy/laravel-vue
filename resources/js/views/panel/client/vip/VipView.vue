@@ -7,16 +7,16 @@ const auth = useAuthStore();
 </script>
 
 <template>
-	<PanelLayout title="Editor">
-		<div class="panel_editor">
-			<h1>Editor Panel</h1>
+	<PanelLayout title="Vip">
+		<div class="panel_wrapper">
+			<h1>Vip List</h1>
 			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus laborum amet veritatis, voluptatibus itaque, expedita ratione dicta modi culpa id laudantium quidem, voluptas illum. In, maxime? Nobis id temporibus ea!</p>
 		</div>
 	</PanelLayout>
 </template>
 
 <style>
-.panel_editor {
+.panel_wrapper {
 	padding-inline: 30px;
 }
 </style>

@@ -1,8 +1,9 @@
 import settingsRoutes from './settings.js';
+import commentsRoutes from './comments.js';
+import vipRoutes from './vip.js';
 
 // Panel routes (guard web)
 const routes = [
-	...settingsRoutes,
 	// Redirect
 	{
 		path: '/panel',
@@ -21,31 +22,9 @@ const routes = [
 		component: () => import('@/views/panel/client/DashboardView.vue'),
 		meta: { requiresAuth: true },
 	},
-	// Editor
-	{
-		path: '/panel/editor',
-		name: 'panel.editor',
-		component: () => import('@/views/panel/client/EditorView.vue'),
-		meta: { requiresAuth: true, hasRole: ['editor', 'manager'] },
-	},
-	// Comments
-	// {
-	// 	path: '/panel/comments/edit',
-	// 	name: 'panel.comments.edit',
-	// 	redirect: { name: 'panel.comments' },
-	// },
-	// {
-	// 	path: '/panel/comments',
-	// 	name: 'panel.comments',
-	// 	component: () => import('@/views/panel/client/comments/ListView.vue'),
-	// 	meta: { requiresAuth: true },
-	// },
-	// {
-	// 	path: '/panel/comments/edit/:id',
-	// 	name: 'panel.comments.edit.id',
-	// 	component: () => import('@/views/panel/client/comments/EditView.vue'),
-	// 	meta: { requiresAuth: true },
-	// },
+	...settingsRoutes,
+	...commentsRoutes,
+	...vipRoutes,
 ];
 
 export default routes;
