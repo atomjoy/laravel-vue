@@ -22,7 +22,27 @@ class ContactController extends Controller
 
 		$perpage = request()->integer('perpage', default: 6);
 
-		return  new ContactCollection(Contact::latest('id')->paginate($perpage));
+		$q = Contact::query()->latest('id');
+
+		if (request()->filled('search')) {
+			$q->searchLastname(request()->input('search'));
+		}
+
+		if (request()->filled('search')) {
+			$q->searchEmail(request()->input('search'));
+		}
+
+		if (request()->filled('search')) {
+			$q->searchMobile(request()->input('search'));
+		}
+
+		if (request()->filled('search')) {
+			$q->searchSubject(request()->input('search'));
+		}
+
+		return new ContactCollection($q->paginate($perpage));
+
+		// return  new ContactCollection(Contact::latest('id')->paginate($perpage));
 	}
 
 	/**

@@ -24,7 +24,19 @@ class SubscriberController extends Controller
 
 		$perpage = request()->integer('perpage', default: 5);
 
-		return  new SubscriberCollection(Subscriber::latest('id')->paginate($perpage));
+		$q = Subscriber::query()->latest('id');
+
+		if (request()->filled('search')) {
+			$q->searchName(request()->input('search'));
+		}
+
+		if (request()->filled('search')) {
+			$q->searchEmail(request()->input('search'));
+		}
+
+		return new SubscriberCollection($q->paginate($perpage));
+
+		// return  new SubscriberCollection(Subscriber::latest('id')->paginate($perpage));
 	}
 
 	/**

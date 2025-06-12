@@ -17,20 +17,20 @@ const search = ref('');
 onMounted(async () => {
 	store.clearError();
 	store.current_page = route.query.page ?? 1;
-	await store.loadList();
+	await store.loadList(search.value);
 });
 
 watch(
 	() => route.query.page,
 	async (newId, oldId) => {
 		store.current_page = route.query.page ?? 1;
-		await store.loadList();
+		await store.loadList(search.value);
 	}
 );
 
 async function setPage(page) {
 	store.current_page = page;
-	await store.loadList();
+	await store.loadList(search.value);
 }
 
 async function searchText() {

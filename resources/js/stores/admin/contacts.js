@@ -20,12 +20,12 @@ export const useItemStore = defineStore('contacts', () => {
 	const getMessage = computed(() => message.value);
 
 	// Actions
-	async function loadList() {
-		let res = await axios.get('/web/api/admin/contacts?page=' + current_page.value + '&perpage=' + perpage.value);
+	async function loadList(search = '') {
+		let res = await axios.get('/web/api/admin/contacts?page=' + current_page.value + '&perpage=' + perpage.value + '&search=' + search);
 		list.value = res?.data?.data ?? [];
 		last_page.value = res?.data.paginate.total_pages ?? 1;
 		current_page.value = res?.data.paginate.current_page ?? 1;
-		router.push({ query: { page: current_page.value } });
+		router.replace({ query: { page: current_page.value } });
 	}
 
 	async function deleteItem(id) {

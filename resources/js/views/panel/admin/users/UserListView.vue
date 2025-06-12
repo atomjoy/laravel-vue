@@ -30,7 +30,7 @@ watch(
 
 async function setPage(page) {
 	store.current_page = page;
-	await store.loadList();
+	await store.loadList(search.value);
 }
 
 async function searchText() {
