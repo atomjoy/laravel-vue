@@ -14,7 +14,11 @@ class RoleChangeListener
 			'path' => storage_path('logs/roles.log'),
 		])->info(
 			'[ADD] User role has been added.',
-			['id' => $event->user->id, 'role' => $event->role->name]
+			[
+				'id' => $event->user->id,
+				'role' => $event->role->name,
+				'user' => $event->user::class,
+			]
 		);
 	}
 }

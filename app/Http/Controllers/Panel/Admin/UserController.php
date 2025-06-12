@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Panel\Admin;
 
+use App\Events\PermissionChange;
+use App\Events\PermissionDelete;
+use App\Events\RoleChange;
+use App\Events\RoleDelete;
 use App\Models\User;
 use App\Exceptions\JsonException;
 use App\Http\Requests\Panel\Admin\StoreUserRequest;
@@ -14,6 +18,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -178,6 +184,206 @@ class UserController extends Controller
 			}
 		} catch (\Throwable $e) {
 			report($e->getMessage());
+		}
+	}
+
+	/**
+	 * Add user role
+	 *
+	 * @param User $user
+	 * @return Response
+	 */
+	public function addRole(User $user)
+	{
+		Gate::authorize('update', $user);
+
+		try {
+			$user = User::find(request()->input('userid'));
+
+			if ($user && request()->input('role') != 'super_admin') {
+				$role = Role::findByName(request()->input('role'), 'web');
+
+				if ($role) {
+					if (!$user->hasRole($role)) {
+						$user->assignRole($role);
+						RoleChange::dispatch($user, $role);
+					}
+
+					return response()->json([
+						'message' => 'Created. Refresh page.',
+					], 200);
+				}
+
+				return response()->json([
+					'message' => 'Invalid role.',
+				], 200);
+			}
+
+			return response()->json([
+				'message' => 'Invalid user.',
+			], 200);
+		} catch (\Throwable $e) {
+			report($e);
+
+			return response()->json([
+				'message' => 'Failed',
+			], 422);
+		}
+	}
+
+	/**
+	 * Remove user role
+	 *
+	 * @param User $user
+	 * @return Response
+	 */
+	public function removeRole(User $user)
+	{
+		Gate::authorize('update', $user);
+
+		try {
+			$user = User::find(request()->input('userid'));
+
+			if ($user && request()->input('role') != 'super_admin') {
+				$role = Role::findByName(request()->input('role'), 'web');
+
+				if ($role) {
+					if ($user->hasRole($role)) {
+						$user->removeRole($role);
+						RoleDelete::dispatch($user, $role);
+					}
+
+					return response()->json([
+						'message' => 'Deleted. Refresh page.',
+					], 200);
+				}
+
+				return response()->json([
+					'message' => 'Invalid role.',
+				], 200);
+			}
+
+			return response()->json([
+				'message' => 'Invalid user.',
+			], 200);
+		} catch (\Throwable $e) {
+			report($e);
+
+			return response()->json([
+				'message' => 'Failed',
+			], 422);
+		}
+	}
+
+	/**
+	 * Add user role
+	 *
+	 * @param User $user
+	 * @return Response
+	 */
+	public function addPermission(User $user)
+	{
+		Gate::authorize('update', $user);
+
+		try {
+			$user = User::find(request()->input('userid'));
+
+			if ($user) {
+				// Allowed only
+				if (!in_array(request()->input('role'), [
+					'role_view',
+					'role_create',
+					'role_update',
+					'role_delete',
+					'user_view',
+					'user_create',
+					'user_update',
+					'user_delete',
+				])) {
+					$permission = Permission::findByName(request()->input('role'), 'web');
+
+					if ($permission) {
+						if (!$user->hasPermissionTo($permission)) {
+							$user->givePermissionTo($permission);
+							PermissionChange::dispatch($user, $permission);
+						}
+
+						return response()->json([
+							'message' => 'Created. Refresh page.',
+						], 200);
+					}
+				}
+
+				return response()->json([
+					'message' => 'Invalid permission.',
+				], 200);
+			}
+
+			return response()->json([
+				'message' => 'Invalid user.',
+			], 200);
+		} catch (\Throwable $e) {
+			report($e);
+
+			return response()->json([
+				'message' => 'Failed',
+			], 422);
+		}
+	}
+
+	/**
+	 * Remove user role
+	 *
+	 * @param User $user
+	 * @return Response
+	 */
+	public function removePermission(User $user)
+	{
+		Gate::authorize('update', $user);
+
+		try {
+			$user = User::find(request()->input('userid'));
+
+			if ($user) {
+				// Allowed only
+				if (!in_array(request()->input('role'), [
+					'role_view',
+					'role_create',
+					'role_update',
+					'role_delete',
+					'user_view',
+					'user_create',
+					'user_update',
+					'user_delete',
+				])) {
+					$permission = Permission::findByName(request()->input('role'), 'web');
+
+					if ($permission) {
+						if ($user->hasPermissionTo($permission)) {
+							$user->revokePermissionTo($permission);
+							PermissionDelete::dispatch($user, $permission);
+						}
+
+						return response()->json([
+							'message' => 'Deleted. Refresh page.',
+						], 200);
+					}
+				}
+
+				return response()->json([
+					'message' => 'Invalid permission.',
+				], 200);
+			}
+
+			return response()->json([
+				'message' => 'Invalid user.',
+			], 200);
+		} catch (\Throwable $e) {
+			report($e);
+
+			return response()->json([
+				'message' => 'Failed',
+			], 422);
 		}
 	}
 }

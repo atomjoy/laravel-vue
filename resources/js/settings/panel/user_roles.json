@@ -1,6 +1,7 @@
 {
 	"roles": [
-		"editor"
+		"editor",
+		"manager"
 	],
 	"permissions": [
 		"disable_login",

@@ -22,7 +22,10 @@ class RoleChange
 	 *
 	 * @return void
 	 */
-	public function __construct(public Admin|User $user, public Role $role) {}
+	public function __construct(
+		public Admin|User $user,
+		public Role $role,
+	) {}
 
 	/**
 	 * Get the channels the event should broadcast on.

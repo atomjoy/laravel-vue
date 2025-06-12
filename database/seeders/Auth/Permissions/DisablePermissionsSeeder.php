@@ -15,8 +15,14 @@ class DisablePermissionsSeeder extends Seeder
 	 */
 	public function run(): void
 	{
+		// Admin
 		foreach (DisableEnum::cases() as $item) {
 			Permission::create(['name' => $item->value, 'guard_name' => 'admin']);
+		}
+
+		// User
+		foreach (DisableEnum::cases() as $item) {
+			Permission::create(['name' => $item->value, 'guard_name' => 'web']);
 		}
 	}
 }

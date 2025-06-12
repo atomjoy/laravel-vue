@@ -61,6 +61,10 @@ Route::prefix('web/api/admin')->name('web.api.admin')->middleware([
 		// Users
 		Route::resource('users', UserController::class)->except(['create', 'edit']);
 		Route::get('users/remove/{user}', [UserController::class, 'remove']);
+		Route::post('users/role', [UserController::class, 'addRole']);
+		Route::post('users/role/remove', [UserController::class, 'removeRole']);
+		Route::post('users/permission', [UserController::class, 'addPermission']);
+		Route::post('users/permission/remove', [UserController::class, 'removePermission']);
 	});
 
 	// Roles: superadmin

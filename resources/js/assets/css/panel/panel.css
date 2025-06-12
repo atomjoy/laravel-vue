@@ -4,6 +4,13 @@
 	--panel-padding-block: 20px;
 	--panel-padding-inline: 30px;
 	--panel-padding: var(--panel-padding-block) var(--panel-padding-inline);
+	--panel-menu-font-size: 15px;
+	--panel-font-size: 15px;
+}
+
+.panel_table_list,
+.panel_table_list tr td {
+	font-size: var(--panel-font-size);
 }
 
 .span_btn {
@@ -12,7 +19,7 @@
 	padding: 3px 9px;
 	margin-top: 5px;
 	margin-right: 5px;
-	font-size: 14px;
+	font-size: var(--panel-font-size);
 	font-weight: 300;
 	color: var(--text-2);
 	border: 1px solid var(--text-2);
@@ -413,7 +420,7 @@
 	float: left;
 	width: 100%;
 	height: auto;
-	font-size: 15px;
+	font-size: var(--panel-menu-font-size);
 	padding: 10px 20px;
 	margin-block: 5px;
 	color: var(--icon-2);
@@ -739,7 +746,7 @@
 
 .panel_list_item_link {
 	color: var(--text-1);
-	font-size: 16px;
+	font-size: var(--panel-font-size);
 	font-weight: 500;
 }
 

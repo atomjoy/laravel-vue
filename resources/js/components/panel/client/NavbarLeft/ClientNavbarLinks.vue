@@ -1,5 +1,5 @@
 <script setup>
-import IconAdmin from '@/assets/icons/IconAdmin.vue';
+import IconEdit from '@/assets/icons/IconEdit.vue';
 import IconReply from '@/assets/icons/IconReply.vue';
 import IconUser from '@/assets/icons/IconUser.vue';
 import IconWidget from '@/assets/icons/IconWidget.vue';
@@ -18,4 +18,18 @@ const auth = useAuthStore();
 	<!-- <NavbarLink to="/panel/comments" text="Comments">
 		<IconReply />
 	</NavbarLink> -->
+
+	<!-- Editor only -->
+	<div v-if="auth.hasRole('editor', 'web')">
+		<NavbarLink to="/panel/editor" text="Editor">
+			<IconEdit />
+		</NavbarLink>
+	</div>
+
+	<!-- Editor and Manager -->
+	<div v-if="auth.hasRole('editor', 'web') || auth.hasRole('manager', 'web')">
+		<!-- <NavbarLink to="/panel/manager" text="Manager">
+			<IconEdit />
+		</NavbarLink> -->
+	</div>
 </template>

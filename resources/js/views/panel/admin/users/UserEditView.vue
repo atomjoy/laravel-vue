@@ -1,14 +1,17 @@
 <script setup>
 import Label from '@/components/auth/Label.vue';
 import Input from '@/components/auth/Input.vue';
+import SelectText from '@/components/auth/SelectText.vue';
+import Hidden from '@/components/auth/Hidden.vue';
 import Textarea from '@/components/auth/Textarea.vue';
 import Button from '@/components/auth/Button.vue';
 import YesNo from '@/components/auth/YesNo.vue';
+import ErrorMessage from '@/components/auth/ErrorMessage.vue';
 import Subtitle from '@/components/auth/Subtitle.vue';
 import Group from '@/components/panel/admin/users/Group.vue';
 import Layout from '@/components/panel/admin/users/Layout.vue';
 import NoRecords from '@/components/utils/alerts/NoRecords.vue';
-// import user_roles from '@/settings/panel/user_roles.json';
+import user_roles from '@/settings/panel/user_roles.json';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useItemStore } from '@/stores/admin/users.js';
@@ -16,10 +19,12 @@ import { useItemStore } from '@/stores/admin/users.js';
 const store = useItemStore();
 const route = useRoute();
 const id = route.params.id;
-// const add_role = ref(null);
-// const remove_role = ref(null);
-// const allowed_roles = user_roles.roles;
-// const allowed_permissions = user_roles.permissions;
+const add_role = ref(null);
+const remove_role = ref(null);
+const add_permission = ref(null);
+const remove_permission = ref(null);
+const allowed_roles = user_roles.roles;
+const allowed_permissions = user_roles.permissions;
 
 onMounted(async () => {
 	store.clearError();
@@ -29,6 +34,26 @@ onMounted(async () => {
 
 function onSubmit(e) {
 	store.updateItem(id, new FormData(e.target));
+}
+
+function onSubmitRole(e) {
+	store.createRole(e);
+	store.scrollTo('.error_role');
+}
+
+function onSubmitRemoveRole(e) {
+	store.removeRole(e);
+	store.scrollTo('.error_role');
+}
+
+function onSubmitPermission(e) {
+	store.createPermission(e);
+	store.scrollTo('.error_permission');
+}
+
+function onSubmitRemovePermission(e) {
+	store.removePermission(e);
+	store.scrollTo('.error_permission');
 }
 </script>
 
@@ -72,6 +97,50 @@ function onSubmit(e) {
 				<Input name="address_line1" v-model="store.item.address_line1" disabled="true" />
 				<Label text="Address line 2" />
 				<Input name="address_line2" v-model="store.item.address_line2" disabled="true" />
+
+				<Button text="Update" class="settings_button" />
+			</form>
+		</Group>
+
+		<Group title="Roles" desc="Add or remove admin role.">
+			<ErrorMessage class="error_role" :message="store.getMessage" :error="store.getError" />
+
+			<Subtitle text="Add role" />
+			<form action="post" @submit.prevent="onSubmitRole">
+				<Label text="Role" />
+				<SelectText name="role" v-model="add_role" :options="allowed_roles" />
+				<Hidden name="userid" v-model="store.item.id" />
+
+				<Button text="Update" class="settings_button" />
+			</form>
+
+			<Subtitle text="Remove role" />
+			<form action="post" @submit.prevent="onSubmitRemoveRole">
+				<Label text="Role" />
+				<SelectText name="role" v-model="remove_role" :options="allowed_roles" />
+				<Hidden name="userid" v-model="store.item.id" />
+
+				<Button text="Update" class="settings_button" />
+			</form>
+		</Group>
+
+		<Group title="Permissions" desc="Add or remove admin permissions.">
+			<ErrorMessage class="error_permission" :message="store.getMessage" :error="store.getError" />
+
+			<Subtitle text="Add permission" />
+			<form action="post" @submit.prevent="onSubmitPermission">
+				<Label text="Permission" />
+				<SelectText name="role" v-model="add_permission" :options="allowed_permissions" />
+				<Hidden name="userid" v-model="store.item.id" />
+
+				<Button text="Update" class="settings_button" />
+			</form>
+
+			<Subtitle text="Remove permission" />
+			<form action="post" @submit.prevent="onSubmitRemovePermission">
+				<Label text="Permission" />
+				<SelectText name="role" v-model="remove_permission" :options="allowed_permissions" />
+				<Hidden name="userid" v-model="store.item.id" />
 
 				<Button text="Update" class="settings_button" />
 			</form>

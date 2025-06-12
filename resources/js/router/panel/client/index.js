@@ -21,6 +21,13 @@ const routes = [
 		component: () => import('@/views/panel/client/DashboardView.vue'),
 		meta: { requiresAuth: true },
 	},
+	// Editor
+	{
+		path: '/panel/editor',
+		name: 'panel.editor',
+		component: () => import('@/views/panel/client/EditorView.vue'),
+		meta: { requiresAuth: true, hasRole: ['editor', 'manager'] },
+	},
 	// Comments
 	// {
 	// 	path: '/panel/comments/edit',

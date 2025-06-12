@@ -14,7 +14,11 @@ class RoleDeleteListener
 			'path' => storage_path('logs/roles.log'),
 		])->info(
 			'[DEL] User role has been deleted.',
-			['id' => $event->user->id, 'role' => $event->role->name]
+			[
+				'id' => $event->user->id,
+				'role' => $event->role->name,
+				'user' => $event->user::class,
+			]
 		);
 	}
 }

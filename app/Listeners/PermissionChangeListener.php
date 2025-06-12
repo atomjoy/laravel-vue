@@ -14,7 +14,11 @@ class PermissionChangeListener
 			'path' => storage_path('logs/permissions.log'),
 		])->info(
 			'[ADD] User permission has been added.',
-			['id' => $event->user->id, 'permission' => $event->permission->name]
+			[
+				'id' => $event->user->id,
+				'permission' => $event->permission->name,
+				'user' => $event->user::class,
+			]
 		);
 	}
 }
