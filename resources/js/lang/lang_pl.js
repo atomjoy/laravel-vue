@@ -307,6 +307,8 @@ const pl = {
 	hidden: 'Niewidoczna',
 	visible: 'Widoczna',
 	Permission: 'Uprawnienie',
+	Last: 'Ostatnia',
+	First: 'Pierwsza',
 	'Min number of characters': 'Minimalna liczba znaków',
 	'Contains a capital letter': 'Zawiera dużą literę',
 	'Contains a small letter': 'Zawiera małą literę',

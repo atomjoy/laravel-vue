@@ -78,11 +78,11 @@ function nextPage() {
 
 <template>
 	<div class="panel_list_links">
-		<div class="panel_paginate_link" @click="prevPage" v-if="current_page > 1">{{ btn_prev }}</div>
-		<div class="panel_paginate_link" @click="setPage(1)" v-if="current_page > 1">{{ btn_first }}</div>
+		<div class="panel_paginate_link" @click="prevPage" v-if="current_page > 1">{{ $t(btn_prev) }}</div>
+		<div class="panel_paginate_link" @click="setPage(1)" v-if="current_page > 1">{{ $t(btn_first) }}</div>
 		<div class="panel_paginate_link" :class="{ panel_paginate_link_active: current_page == i }" v-for="i in sublist" @click="setPage(i)">{{ i }}</div>
-		<div class="panel_paginate_link" @click="setPage(last_page)" v-if="current_page < last_page">{{ btn_last }}</div>
-		<div class="panel_paginate_link" @click="nextPage" v-if="current_page < last_page">{{ btn_next }}</div>
+		<div class="panel_paginate_link" @click="setPage(last_page)" v-if="current_page < last_page">{{ $t(btn_last) }}</div>
+		<div class="panel_paginate_link" @click="nextPage" v-if="current_page < last_page">{{ $t(btn_next) }}</div>
 	</div>
 </template>
 
