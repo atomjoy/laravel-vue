@@ -32,4 +32,11 @@ const auth = useAuthStore();
 			<IconEdit />
 		</NavbarLink> -->
 	</div>
+
+	<!-- Vip user only -->
+	<div v-if="auth.hasRole('vip', 'web')">
+		<!-- <NavbarLink to="/panel/vip" text="Vip">
+			<IconEdit />
+		</NavbarLink> -->
+	</div>
 </template>
